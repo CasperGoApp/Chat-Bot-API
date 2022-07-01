@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Share CasperGo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/animate.css" rel="stylesheet" type="text/css" />
+    <link href="/css/themify-icons.css" rel="stylesheet" type="text/css" />
+    <link href="/css/simple-line-icons.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body class="full-container">
+    <div class="message-box">
+      <div class="logo">
+        <img src="/img/logo.png" />
+      </div>
+
+      <h4>Join CasperGo</h4>
+      <p>
+        We will send you a message in What's App and continue the process from
+        there!
+      </p>
+
+      <div class="select-box">
+        <select id="CountryCode">
+          COUNTRY_LIST_HTML
+        </select>
+      </div>
+
+      <div class="input-box">
+        <input type="tel" onchange="phoneNumberChanged( this.value )" />
+      </div>
+      <button class="button">START! <i class="ti-arrow-right"></i></button>
+
+      <div class="corner corner-LT"><img src="/img/LeftUp.png" /></div>
+      <div class="corner corner-LB"><img src="/img/LeftBottom.png" /></div>
+      <div class="corner corner-RT"><img src="/img/RightUp.png" /></div>
+      <div class="corner corner-RB"><img src="/img/RightBottom.png" /></div>
+    </div>
+
+    <script type="text/javascript" src="/js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript">
+      const serverComm = (dataToSend, callback) =>
+        $.post('/share/confirm', { ...dataToSend, ...{ send: true } }, result =>
+          callback(result)
+        )
+      const phoneNumberChanged = phoneData => {
+        if (phoneData && phoneData.length > 6) {
+          serverComm(
+            {
+              phone: $('#CountryCode').val() + phoneData,
+              userCode: 'MY_USER_CODE'
+            },
+            data => {
+              if (parseInt(data) == 1) {
+                alert(
+                  "Please open your What's App to continue. CasperGo has just sent you an invite to your mobile phone!"
+                )
+              } else {
+                alert(
+                  'There has been an error in this process. If this happens again, please open the home page to report this issue to support.'
+                )
+              }
+            }
+          )
+        }
+      }
+    </script>
+  </body>
+</html>

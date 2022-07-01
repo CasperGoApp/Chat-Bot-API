@@ -1,0 +1,41 @@
+{
+  "name": "chat-bot-api",
+  "version": "1.0.0",
+  "description": "Chat Bot API used to deliver LetsGo messages",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "src/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CasperGoApp/Chat-Bot-API.git"
+  },
+  "author": "LetsGo LLC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CasperGoApp/Chat-Bot-API/issues"
+  },
+  "homepage": "https://github.com/CasperGoApp/Chat-Bot-API#readme",
+  "dependencies": {
+    "@gnometech/bitcoind-rpc": "^0.8.2",
+    "@gnometech/divid-rpc": "^3.0.87",
+    "bip32": "^2.0.6",
+    "bitcoinjs-lib": "^5.2.0",
+    "coingecko-api": "^1.0.10",
+    "crypto-random-int": "^1.0.1",
+    "dotenv": "^10.0.0",
+    "form-data": "^4.0.0",
+    "fs": "0.0.1-security",
+    "gmongo": "^2.0.7",
+    "gnodejs": "^2.0.10",
+    "gnome-wallet-address-validator": "git+https://github.com/GnomeGroup/wallet-address-validator.git",
+    "jimp": "^0.16.1",
+    "json-as-xlsx": "^2.1.0",
+    "mime-kind": "^3.0.0",
+    "node-fetch": "^2.6.1",
+    "qr-image": "^3.2.0",
+    "qrcode-reader": "^1.0.4",
+    "readline": "^1.3.0",
+    "speakeasy": "^2.0.0"
+  }
+}

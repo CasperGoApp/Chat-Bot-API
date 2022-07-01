@@ -1,0 +1,435 @@
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+
+@media screen and (max-width: 1200px) {
+
+	/*==========HEADER==========*/
+
+	.header {
+		height: 80px;
+	}
+	.header .content {
+		width: 100%;
+	}
+
+	/*==========MENU==========*/
+
+	nav {
+		height: 80px;
+	}
+	nav ul {
+	    top: 22px;
+	}
+	.logo {
+		left: 20px;
+		height: 60px;
+	}
+	.nav-mobile {
+		right: 20px;
+	}
+
+	/*==========GRID==========*/
+
+	.colx3 {
+		width: 50%;
+	}
+	.content {
+		width: 90%;
+	}
+
+	/*==========CONTENT==========*/
+
+	/*HOME*/
+
+	.home .swiper-slide h2 {
+	    font-size: 40px;
+	}
+	.home-img img:nth-child(1) {
+		height: 80%;
+		top: 5%;
+		right: -3%;
+	}
+	.home-img img:nth-child(2) {
+		width: 80%;
+	}
+
+	/*FEATURES*/
+
+	.icon-box {
+		width: 80px;
+		height: 80px;
+	}
+	.icon-bg i {
+		width: 30px;
+		height: 30px;
+		font-size: 30px;
+	}
+
+	/*FAQ*/
+
+	.faq {
+		font-size: 14px;
+	}
+	.faq .select-box {
+		width: 50%;
+		margin: 0 auto 20px auto;
+	}
+	.faq .select-box select {
+		font-size: 16px;
+	}
+
+	/*TEXT*/
+
+	.main-title {
+		font-size: 50px;
+	}
+	.subtitle {
+		font-size: 25px;
+	}
+
+	.footer img {
+		width: 80px;
+	}
+}
+
+@media screen and (max-width: 1023px) {
+
+	/*==========CONTENT==========*/
+
+	/*HOME*/
+
+
+	.home-img img:nth-child(1) {
+		height: 60%;
+		top: 20%;
+		right: -2%;
+	}
+	.home-img img:nth-child(2) {
+		width: 105%;
+		bottom: 0%;
+	}
+
+	/*SETUP*/
+
+	.setup .colx2 {
+		width: 100%;
+	}
+	.setup-img {
+	    height: 380px;
+	    margin-top: 0;
+	}
+	.setup-img img {
+	    width: 60%;
+	    height: auto;
+	    position: absolute;
+	    left: 0;
+	    right: 0;
+	    margin: auto;
+	}
+	.setup .subtitle {
+		text-align: center;
+	}
+
+	/*FAQ*/
+
+
+	.faq .select-box i {
+		line-height: 63px;
+	}
+
+	/*CONTACT*/
+
+	.contact .colx2 {
+		width: 100%;
+	}
+	.contact .subtitle {
+		text-align: center;
+	}
+	.contact button {
+		margin: 0 auto;
+	}
+}
+
+@media screen and (max-width: 768px) {
+
+	/*==========HEADER==========*/
+
+	.header .content {
+		margin: 0;
+	}
+
+	/*==========MENU==========*/
+
+	nav ul {
+		width: 100%;
+		display: none;
+		background-color: #1A1818;
+		top: 80px;
+		position: fixed;
+	}
+	nav li {
+		width: 100%;
+	}
+	nav li a {
+		padding: 0 30px;
+		background-color: transparent;
+		color: #FFFFFF;
+		margin: 0;
+		border-radius: 0;
+	}
+	.nav li a:hover {
+		color: #FFFFFF;
+	}
+	.nav li a.active {
+		background-color: #EC252B;
+	}
+	.nav-mobile {
+		display: inline-block;
+	}
+
+	/*==========CONTENT==========*/
+
+	/*HOME*/
+
+	.home-img img:nth-child(1) {
+	    height: 60%;
+	    right: 0;
+	    top: 15%;
+	}
+	.home-img img:nth-child(2) {
+	    width: 120%;
+	    bottom: 10%;
+	    right: -20%;
+	}
+	.home .swiper-slide h2 {
+	    font-size: 30px;
+	}
+
+	/*TEXT*/
+
+	.main-title {
+		font-size: 30px;
+		margin: 10px 0 20px 0;
+	}
+	.subtitle {
+		font-size: 20px;
+		text-align: center;
+	}
+}
+
+@media (min-width: 769px) {
+	nav ul {
+		display: block !important;
+	}
+}
+
+@media screen and (max-width: 600px) {
+
+	/*==========GRID==========*/
+
+	.colx1, .colx2, .colx3, .colx4 {
+		padding: 20px 0;
+	}
+	.colx1 {
+		width: 100%;
+	}
+	.colx2 {
+		width: 100%;
+	}
+	.colx3 {
+		width: 100%;
+	}
+	.colx4 {
+		width: 100%;
+	}
+	.content {
+		width: 90%;
+		height: 100%;
+	}
+
+	/*==========HEADER==========*/
+
+	.header .content {
+		width: 100%;
+	}
+	.logo {
+		left: 5%;
+		height: 60px;
+	}
+
+	/*==========MENU==========*/
+
+	.nav-mobile {
+		right: 5%;
+	}
+
+	/*==========HEADER==========*/
+
+	.header {
+		height: 80px;
+	}
+
+	/*==========MENU==========*/
+
+	nav {
+		height: 80px;
+	}
+
+	/*==========CONTENT==========*/
+
+	/*HOME*/
+
+	.home {
+		height: 560px;
+	}
+	.home .swiper-container {
+		width: 100%;
+	}
+	.home .swiper-slide h2 {
+		font-size: 30px;
+		text-align: center;
+	}
+	.home .swiper-slide p {
+		text-align: center;
+	}
+	.home .swiper-pagination {
+		position: relative;
+	}
+	.home .button {
+		position: relative;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+	}
+	.home .content {
+		background-size: auto 100%;
+		background-repeat: no-repeat;
+	}
+	.home-img {
+		height: 60%;
+		bottom: 60px;
+		top: inherit;
+	}
+	.home-img img:nth-child(1) {
+		height: 80%;
+	    top: 13%;
+	    left: 0;
+	    right: 0;
+	    margin: auto;
+	}
+	.home-img img:nth-child(2) {
+		width: 200%;
+		right: 0;
+		left: -55%;
+		bottom: -30%;
+		margin: auto;
+		background-size: 50% 20%;
+	}
+	.wave-box {
+		height: 20%;
+	}
+
+	/*FEATURES*/
+
+	.icon-box {
+		width: 80px;
+		height: 80px;
+	}
+	.icon-bg i {
+		width: 30px;
+		height: 30px;
+		font-size: 30px;
+	}
+
+	/*FAQ*/
+
+	.faq {
+		font-size: 14px;
+	}
+	.faq-panel {
+		width: 100%;
+	}
+	.faq .select-box {
+		width: 100%;
+		margin: 0 auto 20px auto;
+	}
+	.faq .select-box select {
+		font-size: 14px;
+	}
+	.faq .select-box i {
+	    line-height: 60px;
+	}
+
+	/*SETUP*/
+
+	.setup-img {
+		height: 300px;
+		margin-top: 0;
+	}
+	.setup-img img {
+		width: 100%;
+		height: auto;
+		position: absolute;
+	}
+	.setup .swiper2 {
+		font-size: 14px;
+	}
+	.timeline .event {
+		padding: 20px;
+	}
+	.timeline .event:before {
+    	left: -75px;
+    }
+    .timeline {
+	    margin: 0 auto 0 80px;
+    }
+
+    /*CONTACT*/
+
+	.contact .button {
+		margin: 0 auto;
+	}
+
+	/*FOOTER*/
+
+	.footer {
+		font-size: 12px;
+	}
+	.footer img {
+		width: 140px;
+		height: auto;
+	}
+	.footer .colx2:nth-child(1) {
+		text-align: center;
+	}
+	.footer .colx2:nth-child(2) {
+		text-align: center;
+	}
+
+	/*TEXT*/
+
+	.main-title {
+		font-size: 30px;
+		margin: 10px 0 20px 0;
+	}
+	.subtitle {
+		font-size: 20px;
+		text-align: center;
+	}
+}
+
+@media screen and (max-width: 599px) {
+
+	.home-img img:nth-child(2) {
+	    width: 120%;
+	    left: -10%;
+			top: -20%;
+	}
+	.setup-img img {
+	    width: 80%;
+			top: 25%;
+	}
+	.setup-img {
+	    height: 350px;
+	}
+}

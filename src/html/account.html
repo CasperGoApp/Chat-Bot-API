@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CasperGo ... Loading</title>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="/img/apple-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      href="/img/apple-icon-60x60.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="/img/apple-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="/img/apple-icon-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="/img/apple-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="/img/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="/img/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="/img/apple-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/img/apple-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/img/android-icon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/img/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="/img/favicon-96x96.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/img/favicon-16x16.png"
+    />
+    <link href="/css/style.css?0" rel="stylesheet" type="text/css" />
+    <link href="/css/fonts.css" rel="stylesheet" type="text/css" />
+    <link href="/css/animate.css" rel="stylesheet" type="text/css" />
+    <link href="/css/themify-icons.css" rel="stylesheet" type="text/css" />
+    <link href="/css/linear-icons.css" rel="stylesheet" type="text/css" />
+    <link href="/css/elegant-icons.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="main-wrapper">
+      <!--LEFT PANEL-->
+
+      <div class="left-panel">
+        <div class="left-panel-logo">
+          <img src="/img/divicatlogo1.png" />
+        </div>
+      </div>
+
+      <!--RIGHT PANEL-->
+
+      <div class="right-panel">
+        <div class="content-panel">
+          <div class="topnav" id="myTopnav">
+            <a class="active-section">Menu</a>
+            <a onclick="showScreen(1)">Language</a>
+            <a onclick="showScreen(11)">Currency</a>
+            <a onclick="showScreen(10)">Username</a>
+            <a onclick="showScreen(6)">Multi Factor Authentication</a>
+            <a onclick="showScreen(2)">Advanced</a>
+            <a href="javascript:void(0);" class="icon">&#9776;</a>
+          </div>
+
+          <!--Screen 1-->
+
+          <div class="hidden" id="Screen1">
+            <h2 id="Screen1Title"></h2>
+            <p id="Screen1Text"></p>
+            <div id="LanguageList"></div>
+            <button onclick="loadWalletAddresses()" class="SaveQuit"></button>
+          </div>
+
+          <!--Screen 2-->
+
+          <div class="hidden" id="Screen2">
+            <h2 id="Screen2Title"></h2>
+            <p id="Screen2Text"></p>
+            <button onclick="showScreen(3)" class="YesButton" id="YesWallet">
+              <i class="icon_check"></i>
+            </button>
+            <button onclick="skipWallet()" class="NoButton" id="NoWallet">
+              <i class="icon_close"></i>
+            </button>
+            <h2 id="FAQsTitle"></h2>
+            <div id="FAQList"></div>
+            <button
+              onclick="loadWalletAddresses()"
+              class="SaveQuit"
+              id="SaveWalletCreate"
+            ></button>
+          </div>
+
+          <!--Screen 3-->
+
+          <div class="hidden" id="Screen3">
+            <h2 id="Screen3Title"></h2>
+            <p id="Screen3Text"></p>
+            <button onclick="createWallet()" id="CreateWallet"></button>
+            <button onclick="showScreen(5)" id="ImportWallet"></button>
+          </div>
+
+          <!--Screen 4-->
+
+          <div class="hidden" id="Screen4">
+            <h2 id="Screen4Title"></h2>
+            <p id="Screen4Text"></p>
+            <textarea rows="5" id="NewSeedPhrase"></textarea>
+            <p id="SavePhrase"></p>
+            <button onclick="skipWallet()" id="SavedPhrase"></button>
+          </div>
+
+          <!--Screen 5-->
+
+          <div class="hidden" id="Screen5">
+            <h2 id="Screen5Title"></h2>
+            <p id="Screen5Text"></p>
+            <textarea id="ImportSeedPhrase"></textarea>
+            <button onclick="importWallet()" id="ImportWalletButton"></button>
+          </div>
+
+          <!--Screen 6-->
+
+          <div class="hidden" id="Screen6">
+            <div class="content">
+              <h2 id="Screen6Title"></h2>
+              <p id="Screen6Text"></p>
+              <button onclick="loadTFAToken()" id="Google2FAToken"></button>
+              <button onclick="showScreen(9)" id="PINCode"></button>
+              <button onclick="cleanTFA(true)" id="NO2FA"></button>
+              <button onclick="loadWalletAddresses()" class="SaveQuit"></button>
+            </div>
+          </div>
+
+          <!--Screen 7-->
+
+          <div class="hidden" id="Screen7">
+            <div class="content">
+              <h2 id="Screen7Title"></h2>
+              <p id="Screen7Text"></p>
+              <input type="text" maxlength="30" id="DiviGoToken" />
+              <button
+                onclick="setDiviGoToken()"
+                id="DiviGoTokenContinue"
+              ></button>
+            </div>
+          </div>
+
+          <!--Screen 8-->
+
+          <div class="hidden" id="Screen8">
+            <div class="content">
+              <h2 id="Screen8Title"></h2>
+              <p id="Screen8Text"></p>
+              <div class="qrcode" onclick="open2FAInApp()">
+                <img id="TwoFAQRCode" width="100%" />
+              </div>
+              <button
+                onclick="setGoogleToken()"
+                id="TwoFAFirstCodeContinue"
+              ></button>
+            </div>
+          </div>
+
+          <!--Screen 9-->
+
+          <div class="hidden" id="Screen9">
+            <div class="content">
+              <h2 id="Screen9Title"></h2>
+              <p id="Screen9Text"></p>
+              <input type="password" maxlength="6" id="UserPINCode" />
+              <button onclick="setPINCode()" id="UserPINCodeContinue"></button>
+            </div>
+          </div>
+
+          <!--Screen 10-->
+
+          <div class="hidden" id="Screen10">
+            <div class="content">
+              <h2 id="Screen10Title"></h2>
+              <p id="Screen10Text"></p>
+              <div id="ExistingUserInfo"></div>
+              <input
+                type="text"
+                maxlength="30"
+                id="Username"
+                onchange="checkUsername()"
+              />
+              <div id="UsernameValid"></div>
+              <div id="UsernameContinue" class="hidden">
+                <button
+                  onclick="loadWalletAddresses()"
+                  id="UsernameContinueButton"
+                ></button>
+              </div>
+              <button onclick="loadWalletAddresses()" class="SaveQuit"></button>
+            </div>
+          </div>
+
+          <!--Screen 11-->
+
+          <div class="hidden" id="Screen11">
+            <div class="content">
+              <h2 id="Screen11Title"></h2>
+              <p id="Screen11Text"></p>
+              <div id="CurrencyList"></div>
+              <button onclick="loadWalletAddresses()" class="SaveQuit"></button>
+            </div>
+          </div>
+
+          <!--Screen 12-->
+
+          <div class="hidden" id="Screen12">
+            <div class="content" onclick="window.close()">
+              <h2 id="Screen12Title"></h2>
+              <p id="Screen12Text"></p>
+            </div>
+          </div>
+
+          <!--Screen 13-->
+
+          <div class="hidden" id="Screen13">
+            <div class="content">
+              <h2 id="Screen13Title"></h2>
+              <p id="Screen13Text"></p>
+              <input type="password" maxlength="6" id="FirstTFACode" />
+              <button
+                onclick="setFirstTFACode()"
+                id="FirstTFACodeContinue"
+              ></button>
+            </div>
+          </div>
+
+          <!--Screen 14-->
+
+          <div class="hidden" id="Screen14">
+            <div class="content">
+              <h2 id="Screen14Title"></h2>
+              <p id="Screen14Text"></p>
+              <input type="password" maxlength="6" id="ConfirmTFACode" />
+              <button
+                onclick="confirmTFACode()"
+                id="ConfirmTFACodeContinue"
+              ></button>
+            </div>
+          </div>
+
+          <!--LOADING-->
+
+          <div class="content-panel hidden" id="Loading">
+            <div class="content">
+              <h2 id="LoadingTitle"></h2>
+              <p id="LoadingText"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="/js/lang.js?16"></script>
+    <script type="text/javascript" src="/js/screen.js?16"></script>
+    <script type="text/javascript" src="/js/encryptDecrypt.js"></script>
+    <script type="text/javascript" src="/js/loadWalletAddresses.js?16"></script>
+    <script type="text/javascript" src="/js/ux.js?16"></script>
+    <script type="text/javascript" src="/js/load.js?16"></script>
+    <script type="text/javascript">
+      const KEY_SERVER = 'https://keys.gnome.one/'
+      const ROUTE_NAME = 'ROUTENAME'
+      const PHONE_NUMBER = 'PHONENUMBER'
+      const PHONE_ID = 'PHONEID'
+      const USER_DATA = USER_INFORMATION
+      let lang,
+        mnemonic,
+        seed,
+        username,
+        fiat,
+        diviGoTokenSerial,
+        twoFAData,
+        tfaCode,
+        userPINCode,
+        tfaType,
+        language = null
+      let screen = 0
+      let openQuestion = 0
+      let screenHistory = []
+      let isLoading = false
+      const langCodes = { en: 'english', es: 'spanish' }
+
+      window.onload = onload
+
+      function main() {
+        var x = document.getElementById('myTopnav')
+        if (x.className === 'topnav') {
+          x.className += ' responsive'
+        } else {
+          x.className = 'topnav'
+        }
+      }
+      main()
+    </script>
+  </body>
+</html>

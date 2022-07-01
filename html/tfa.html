@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CasperGo Two Factor Authentication</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/animate.css" rel="stylesheet" type="text/css" />
+    <link href="/css/themify-icons.css" rel="stylesheet" type="text/css" />
+    <link href="/css/simple-line-icons.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="mainContainer">
+      <!--HEADER-->
+
+      <div class="logo">
+        <img src="/img/logo-white.png" class="logo" />
+      </div>
+
+      <!--LOADING-->
+
+      <div id="LoadingInfo" class="animated fadeIn" style="display: none;">
+        <div class="logo-loader animated bounceIn delay-1s">
+          <img src="/img/icon-divi.png" />
+        </div>
+        <div class="loader"></div>
+      </div>
+
+      <!--Confirm Existing Code-->
+
+      <div
+        id="ConfirmExistingCode"
+        class="animated fadeInUp faster"
+        style="display: none;"
+      >
+        <h4>Confirm Existing Code</h4>
+        <p>
+          To contiue, enter the code from the two-factor app you have setup.
+        </p>
+        <div class="input-box">
+          <input type="number" id="Existing2FACode" size="8" maxlength="10" />
+        </div>
+        <button
+          class="button"
+          onclick="checkExistingCode( $( '#Existing2FACode' ).val() );"
+        >
+          Continue <i class="ti-arrow-right"></i>
+        </button>
+      </div>
+
+      <!--Confirm Existing Code Failed-->
+
+      <div
+        id="ConfirmExistingCodeFailed"
+        class="animated fadeInUp faster"
+        style="display: none;"
+      >
+        <h4 class="warning">Confirm Existing Code Failed</h4>
+        <p>
+          The code doesn't match, enter the code from the two-factor app you
+          have setup.
+        </p>
+        <div class="input-box">
+          <input
+            type="number"
+            id="Existing2FACodeFailed"
+            size="8"
+            maxlength="10"
+          />
+        </div>
+        <button
+          class="button"
+          onclick="checkExistingCode( $( '#Existing2FACodeFailed' ).val() );"
+        >
+          Continue <i class="ti-arrow-right"></i>
+        </button>
+      </div>
+
+      <!--Confirm Amount-->
+
+      <div
+        id="ConfirmAmount"
+        class="animated fadeInUp faster"
+        style="display: none;"
+      >
+        <h4>Setup two-factor authentication!</h4>
+        <p>
+          Maximum amount equivalent in USD before asked for your two-factor code
+          (in 24 hours):
+        </p>
+        <div class="input-box">
+          <input
+            type="number"
+            id="Max2faPer"
+            value="MAX_BEFORE_TFA"
+            placeholder="Max $"
+          />
+        </div>
+        <p>Email address:</p>
+        <div class="input-box">
+          <input
+            type="email"
+            id="emailAddress"
+            onkeyup="emailChanged( this.value )"
+            placeholder="Email Address"
+            value="EMAIL_ADDRESS"
+          />
+        </div>
+        <p>Country Code:</p>
+        <div class="select-box">
+          <select id="countryCode" style="text-align: center;"
+            >COUNTRY_LIST_HTML</select
+          >
+        </div>
+        <p>Phone Number:</p>
+        <div class="input-box">
+          <input
+            type="tel"
+            id="phoneNumber"
+            onkeyup="phoneChanged( this.value )"
+            placeholder="Phone Number"
+            value="PHONE_NUMBER_NO_COUNTRY"
+          />
+        </div>
+        <button
+          class="button"
+          id="isEmailEnteredContinue"
+          onclick="maxAmountSet( $( '#Max2faPer' ).val() )"
+        >
+          Continue <i class="ti-arrow-right"></i>
+        </button>
+      </div>
+
+      <!--Select Provider-->
+
+      <div
+        id="SelectProvider"
+        class="animated fadeInUp faster"
+        style="display: none;"
+      >
+        <button class="button-store" onclick="providerClicked( 'Google' )">
+          Use Google Authenticator
+          <img
+            src="/img/icon-google-authenticator.png"
+            onclick="providerClicked( 'Google' )"
+          />
+        </button>
+
+        <button class="button-store" onclick="providerClicked( 'Authy' )">
+          Use Authy
+          <img
+            src="/img/icon-authy.png"
+            onclick="providerClicked( 'Google' )"
+          />
+        </button>
+      </div>
+
+      <!--Use Google-->
+
+      <div
+        id="UseGoogle"
+        class="animated fadeInUp faster"
+        style="display: none;"
+      >
+        <h4>Use Google Authenticator</h4>
+        <p>1- If you have not already, please:</p>
+        <a
+          style="display: none;"
+          class="button-store"
+          id="DownloadGoogleAndroid"
+          href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en&gl=US"
+          >Download Google Authenticator <i class="ti-android"></i
+        ></a>
+        <a
+          style="display: none;"
+          class="button-store"
+          id="DownloadGoogleiOS"
+          href="https://apps.apple.com/us/app/google-authenticator/id388497605"
+          >Download Google Authenticator <i class="ti-apple"></i
+        ></a>
+        <p>2- AFTER you install the app, please:</p>
+        <button class="button" onclick="clickContinue( 'Google' );">
+          Click Here
+        </button>
+      </div>
+
+      <!--Use Authy-->
+
+      <div
+        id="UseAuthy"
+        class="animated fadeInUp faster"
+        style="display: none;"
+      >
+        <h4>Use Authy</h4>
+        <p>1- If you have not already, please:</p>
+        <a
+          class="button-store button-store-small"
+          href="https://authy.com/download/"
+          >Download Authy <i class="ti-lock"></i
+        ></a>
+        <p>2- AFTER you install the app and register, please</p>
+        <button class="button" onclick="clickContinue( 'Authy' );">
+          Click Here
+        </button>
+      </div>
+
+      <!--Confirm Code-->
+
+      <div
+        id="ConfirmCode"
+        class="animated fadeInUp faster"
+        style="display: none;"
+      >
+        <h4>To complete linking, enter the 2FA code from the app.</h4>
+        <div class="input-box">
+          <input type="number" id="Final2FACode" size="8" maxlength="10" />
+        </div>
+        <button
+          class="button"
+          onclick="confirmCode( $( '#Final2FACode' ).val() );"
+        >
+          Confirm
+        </button>
+      </div>
+
+      <!--Setup Success-->
+
+      <div
+        id="SetupSuccess"
+        class="animated fadeInUp faster"
+        class="animated fadeInUp faster"
+        style="display: none;"
+      >
+        <h4>Your 2FA has been setup successfully!</h4>
+        <div class="icon-box animated bounceIn delay-1s">
+          <i class="ti-check"></i>
+        </div>
+        <p>You can now close this browser and return to What's App.</p>
+      </div>
+
+      <!--Setup Fail Confirm Code Again-->
+
+      <div
+        id="SetupFailConfirmCodeAgain"
+        class="animated fadeInUp faster"
+        style="display: none;"
+      >
+        <p>
+          The code doesn't match what is expected, to complete linking, enter
+          the 2fa code from the app.
+        </p>
+        <div class="input-box">
+          <input type="number" id="Final2FACodeAgain" size="8" maxlength="10" />
+        </div>
+        <button
+          class="button"
+          onclick="confirmCode( $( '#Final2FACodeAgain' ).val() );"
+        >
+          Confirm <i class="ti-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+    <script type="text/javascript" src="/js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript">
+      const myUserCode = 'MY_USER_CODE'
+      const iOS = _ =>
+        [
+          'iPad Simulator',
+          'iPhone Simulator',
+          'iPod Simulator',
+          'iPad',
+          'iPhone',
+          'iPod'
+        ].includes(navigator.platform)
+      const checkEmail = email =>
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+          email
+        )
+      const serverComm = (dataToSend, callback) =>
+        $.post('/auth/', { ...dataToSend, ...{ send: true } }, result =>
+          callback(result)
+        )
+
+      let userData = null
+      let userEmail = null
+      let userPhone = null
+
+      window.onload = _ =>
+        serverComm({ code: myUserCode }, result => {
+          userData = result
+          console.log(userData)
+          if (!userData) {
+            document.location.href = '/'
+          } else {
+            $('#LoadingInfo').hide()
+            $('#DownloadGoogle' + (iOS() ? 'iOS' : 'Android')).show()
+            if (userData.max) {
+              $('#Max2faPer').val(userData.max)
+            }
+            if (userData.email) {
+              userEmail = userData.email
+              $('#emailAddress').val(userData.email)
+            }
+            if (userData.phoneNumber) {
+              userPhone = userData.phoneNumber
+              $('#phoneNumber').val(userData.phoneNumber)
+            } else if (userData.origNumber && userData.origNumber.length > 0) {
+              let setCountryCode = null
+              for (
+                let i = 0;
+                i < document.getElementById('countryCode').options.length;
+                i++
+              ) {
+                const thisValue = document.getElementById('countryCode')
+                  .options[i].value
+                if (
+                  thisValue &&
+                  !setCountryCode &&
+                  thisValue == userData.origNumber.substr(0, thisValue.length)
+                ) {
+                  setCountryCode = thisValue
+                  $('#countryCode').val(setCountryCode)
+                  $('#phoneNumber').val(
+                    userData.origNumber.substr(thisValue.length)
+                  )
+                }
+              }
+            }
+            let lastActiveTimeAllowed = new Date()
+            lastActiveTimeAllowed.setMinutes(
+              lastActiveTimeAllowed.getMinutes() - 5
+            )
+            if (
+              userData.existing &&
+              (!userData.codeOkToUpdate ||
+                userData.codeOkToUpdate > lastActiveTimeAllowed.getTime())
+            ) {
+              $('#ConfirmExistingCode').show()
+              $('#ConfirmAmount').hide()
+            } else {
+              $('#ConfirmExistingCode').hide()
+              $('#ConfirmAmount').show()
+            }
+          }
+        })
+
+      const maxAmountSet = amount => {
+        $('#LoadingInfo').show()
+        $('#ConfirmAmount').hide()
+        serverComm(
+          {
+            code: myUserCode,
+            updateAmount: parseFloat(amount),
+            updateEmail: userEmail,
+            updatePhoneNumber: userPhone,
+            updateCountryCode: $('#countryCode').val()
+          },
+          result => {
+            userData = result
+            if (userData.max) {
+              $('#Max2faPer').val(userData.max)
+            }
+            if (userData.email) {
+              userEmail = userData.email
+              $('#emailAddress').val(userData.email)
+            }
+            if (userData.phoneNumber) {
+              userPhone = userData.phoneNumber
+              $('#phoneNumber').val(userData.phoneNumber)
+            }
+            $('#LoadingInfo').hide()
+            $('#SelectProvider').show()
+          }
+        )
+      }
+
+      const providerClicked = provider => {
+        $('#Use' + provider).show()
+        $('#SelectProvider').hide()
+      }
+
+      const checkContinueButton = _ => {
+        if (userEmail && userPhone) {
+          $('#isEmailEnteredContinue').show()
+        } else {
+          $('#isEmailEnteredContinue').hide()
+        }
+      }
+
+      const emailChanged = emailValue => {
+        userEmail = emailValue
+        checkContinueButton()
+      }
+
+      const phoneChanged = phoneValue => {
+        userPhone = phoneValue
+        checkContinueButton()
+      }
+
+      const clickContinue = provider => {
+        if (
+          confirm(
+            'This process will take you to the app, ' +
+              provider +
+              '. Please copy the first valid code and come to this page to complete the linking of the 2FA on your account. To cancel you may click Cancel or No.'
+          )
+        ) {
+          $('#LoadingInfo').show()
+          $('#Use' + provider).hide()
+          serverComm({ code: myUserCode, selectProvider: provider }, result => {
+            if (result.link) {
+              document.location.href = result.link
+            }
+            $('#LoadingInfo').hide()
+            $('#ConfirmCode').show()
+          })
+        }
+      }
+
+      const confirmCode = code => {
+        if (code.length > 5) {
+          $('#ConfirmCode').hide()
+          $('#LoadingInfo').show()
+          $('#SetupFailConfirmCodeAgain').hide()
+          serverComm({ code: myUserCode, confirmFirstCode: code }, result => {
+            $('#LoadingInfo').hide()
+            if (result) {
+              $('#SetupSuccess').show()
+            } else {
+              $('#Final2FACodeAgain').show()
+              $('#SetupFailConfirmCodeAgain').show()
+            }
+          })
+        }
+      }
+
+      const checkExistingCode = code => {
+        if (code.length > 5) {
+          $('#ConfirmExistingCode').hide()
+          $('#ConfirmExistingCodeFailed').hide()
+          $('#LoadingInfo').show()
+          serverComm({ code: myUserCode, validateToUpdate: code }, result => {
+            $('#LoadingInfo').hide()
+            if (result) {
+              userData.codeOkToUpdate = new Date().getTime()
+              $('#ConfirmAmount').show()
+            } else {
+              $('#ConfirmExistingCodeFailed').show()
+            }
+          })
+        }
+      }
+      //countryCode-phoneNumber
+    </script>
+  </body>
+</html>

@@ -1,0 +1,117 @@
+{
+  "title": "CasperGo",
+  "steps": [
+    {
+      "title": "Bienvenido a CasperGo",
+      "text": "Algunas opciones se pueden adaptar a su lengua nativa. Por favor, seleccione su idioma de preferencia!"
+    },
+    {
+      "title": "Llaves &amp; Cripto",
+      "text": "¿Le gustaría administrar sus llaves?"
+    },
+    {
+      "title": "¿Crear o importar?",
+      "text": "¿Le gustaría crear una nueva billetera criptográficamente segura o le gustaría usar su frase existente para restaurar y usar su billetera?"
+    },
+    {
+      "title": "LEE ESTO",
+      "text": "Acabamos de generarle una frase segura para su billetera. Como desea administrar sus claves, esta será la ÚNICA forma de acceder a su billetera. Asegúrese de guardar esta información en un lugar seguro y NUNCA en línea o en su escritorio."
+    },
+    {
+      "title": "Importar Billetera",
+      "text": "Ingrese la frase inicial existente para importar las direcciones de su billetera y la información de la transacción."
+    },
+    {
+      "title": "Autenticación por Multifactor",
+      "text": "Puede utilizar la autenticación multifactor para proteger aún más su cuenta; ofrecemos las siguientes soluciones para garantizar que su billetera esté protegida."
+    },
+    {
+      "title": "CasperGo Token",
+      "text": "¡Ha recibido el CasperGo Token por correo y está listo para activarlo en su cuenta! Dé la vuelta al dispositivo e ingrese el número de serie que se muestra."
+    },
+    {
+      "title": "Autenticador de Google / Authy / Etc.",
+      "text": "¿Tiene una aplicación existente para mantener sus tokens 2FA? Puede usar esa aplicación existente con CasperGo, ahora mismo, escanee el siguiente código QR (o haga clic en él si está en su dispositivo móvil) y haga clic en continuar cuando haya terminado de agregarlo a su cartera."
+    },
+    {
+      "title": "Código PIN",
+      "text": "Tiene la opción de proteger su cuenta con un simple código PIN. Eliges un código de 6 dígitos numéricos y esta será su segunda opcion de seguridad."
+    },
+    {
+      "title": "Nombres de usuario ... tan fácil",
+      "text": "Ingrese un nombre de usuario que le gustaría usar de 5 a 30 caracteres y / o números. Después de elegir un nombre de usuario, verificaremos si puede usarlo (si aún no está en uso)."
+    },
+    {
+      "title": "Seleccione el tipo de moneda",
+      "text": "A veces, Cripto es difícil, es bastante fácil de ver en una lista de balances, el monto de mi balance es calculado en mi moneda local. No sé cuánto son 100 DIVI en USD, ¡Pero esta configuración proporcionará automáticamente una conversión en tiempo real!"
+    },
+    {
+      "title": "Todo listo",
+      "text": "Ahora puede cerrar esta ventana y continuar en ROUTENAME"
+    }
+  ],
+  "yes": "Sí",
+  "no": "No",
+  "faq": "FAQs",
+  "createWallet": "Crear nueva billetera",
+  "importWallet": "Importar billetera",
+  "savePhrase": "Guarde esta frase inicial en un lugar seguro. Perder esto significará que perderá toda su billetera para siempre. Si reinstala este sistema, necesitará esta frase para recuperar su billetera.",
+  "phraseSaved": "¡He guardado esto en un lugar seguro!",
+  "existingPhrasePlaceholder": "Frase Mnemotécnica",
+  "importButton": "Importar billetera",
+  "usernamePlaceholder": "Nuevo nombre de usuario",
+  "usernameContinue": "Guardar y Continuar",
+  "usernameChecking": "🕒 Verificando la disponibilidad del nombre de usuario <br /> ... Espere ...",
+  "usernameAvailable": "✔️ Nombre de usuario disponible",
+  "usernameNotAvailable": "⚠️ El nombre de usuario USERNAME no está disponible. <br /> Elija otro.",
+  "clickatell": "What's App",
+  "signal": "Signal",
+  "telegram": "Telegram",
+  "iHaveDiviGoToken": "Tengo un CasperGo Token",
+  "useGoogleAuth": "Autenticador de Google / Authy / Etc.",
+  "usePINCode": "Quiero usar un código PIN",
+  "no2FA": "No quiero usar 2FA.",
+  "diviGoToken": "Número de serie en la parte posterior",
+  "diviGoTokenContinue": "Continuar",
+  "twoFaContinue": "Continuar",
+  "pinCodeUser": "Nuevo código PIN",
+  "pinCodeUserContinue": "Continuar",
+  "loadingTitle": "Espere por favor",
+  "loadingText": "¡Estamos cargando ahora!",
+  "languages": {
+    "spanish": { "name": "Español", "image": "esp.png", "code": "es" },
+    "english": { "name": "English", "image": "usa.png", "code": "en" },
+    "japanese": { "name": "日本", "image": "jpn.png", "code": "" },
+    "italian": { "name": "Italiano", "image": "ita.png", "code": "" },
+    "french": { "name": "Français", "image": "fra.png", "code": "" },
+    "korean": { "name": "한국어", "image": "kor.png", "code": "" },
+    "czech": { "name": "Čeština", "image": "cze.png", "code": "" },
+    "portuguese": { "name": "Português", "image": "por.png", "code": "" },
+    "chinese_traditional": {
+      "name": "繁體中文",
+      "image": "chi.png",
+      "code": ""
+    }
+  },
+  "currencies": {
+    "spanish": { "name": "MXN", "image": "mxn.png", "code": "es" },
+    "english": { "name": "USD", "image": "usa.png", "code": "en" },
+    "japanese": { "name": "JPY", "image": "jpn.png", "code": "" },
+    "italian": { "name": "EUR", "image": "ita.png", "code": "" },
+    "french": { "name": "EUR", "image": "fra.png", "code": "" },
+    "korean": { "name": "KRW", "image": "kor.png", "code": "" },
+    "czech": { "name": "CZK", "image": "cze.png", "code": "" },
+    "portuguese": { "name": "EUR", "image": "por.png", "code": "" },
+    "chinese_traditional": { "name": "CNY", "image": "chi.png", "code": "" }
+  },
+  "FAQs": [
+    {
+      "question": "Pregunta uno",
+      "answer": "Esta es la respuesta a la Pregunta 1"
+    },
+    {
+      "question": "Pregunta dos",
+      "answer": "Esta es la respuesta a la Pregunta 2"
+    }
+  ]
+}

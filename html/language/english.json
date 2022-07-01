@@ -1,0 +1,133 @@
+{
+  "title": "CasperGo",
+  "steps": [
+    {
+      "title": "Welcome to CasperGo",
+      "text": "Select your preferred language."
+    },
+    {
+      "title": "Advanced Account Options",
+      "text": "Would you like to manage your Secret Phrase (including importing a prior one)?"
+    },
+    {
+      "title": "Create or Import?",
+      "text": "Would you like to create a new wallet or use your existing Secret Phrase to restore an old one?"
+    },
+    {
+      "title": "READ THIS",
+      "text": "This is your Secret Phrase. It will be the ONLY way to access your wallet. Save it in a safe place and never online or on your computer. <a href='https://blockster.com/blockdesk/1618_ways-to-store-your-seed-phrase-securely' target='SafeCrypto'>Click here for help</a>."
+    },
+    {
+      "title": "Import Wallet",
+      "text": "Enter your Secret Phrase to import your wallet and transaction history."
+    },
+    {
+      "title": "Multi Factor Authentication",
+      "text": "You can use various types of MFA (Multi Factor Authentication) to make your account more secure.  We offer the following solutions to ensure your wallet is protected."
+    },
+    {
+      "title": "CasperGo OTP Device",
+      "text": "You have received the CasperGo Token in the Mail and are ready to activate it on your account! Please turn the device over and enter the serial number shown."
+    },
+    {
+      "title": "Google Authenticator / Authy / Etc.",
+      "text": "If you have a 2FA app such as Google Authenticator or Authy, use it now by scanning this QR Code.  Or click on it if you are on a mobile device."
+    },
+    {
+      "title": "PIN Code",
+      "text": "You can secure your account with a PIN code.  Choose a 6 digit code (numbers only.)"
+    },
+    {
+      "title": "Usernames ... so easy",
+      "text": "Please enter a username you would like to use from 5-30 characters and/or numbers. After choosing an username, we will verify if you can use it (if it's not already taken)!"
+    },
+    {
+      "title": "Select currency",
+      "text": "Select your preferred govt currency such as USD, EURO, etc."
+    },
+    {
+      "title": "All Done",
+      "text": "You can now close this window and continue in ROUTE_NAME"
+    },
+    {
+      "title": "Confirm 2FA Code",
+      "text": "Please confirm the code appearing in your app."
+    },
+    {
+      "title": "Confirm 2FA Code",
+      "text": "Please confirm the code appearing in your app to open the settings."
+    }
+  ],
+  "yes": "Yes",
+  "no": "No",
+  "faq": "FAQs",
+  "saveAndQuit": "Save and Quit",
+  "createWallet": "Create new wallet",
+  "importWallet": "Import wallet",
+  "savePhrase": "Save this Secret Phrase in a safe location.  If you lose it, you can lose access to your wallet.  Also, anyone with this Secret Phrase can have access to your wallet.  You can use this Secret Phrase to recover your wallet.",
+  "phraseSaved": "I have saved this in a safe location!",
+  "existingPhrasePlaceholder": "Mnemonic Phrase",
+  "importButton": "Import Wallet",
+  "usernamePlaceholder": "New Username",
+  "usernameContinue": "Save and Continue",
+  "usernameChecking": "🕒 Verifying Username Availability<br />... Please wait ...",
+  "usernameAvailable": "✔️ Username available",
+  "usernameNotAvailable": "⚠️ The username USERNAME is not available.<br />Please choose another.",
+  "clickatell": "What's App",
+  "botmaker": "What's App",
+  "signal": "Signal",
+  "telegram": "Telegram",
+  "iHaveDiviGoToken": "I have a CasperGo OTP Device",
+  "useGoogleAuth": "Google Authenticator / Authy / Etc.",
+  "usePINCode": "I want to use a PIN Code",
+  "no2FA": "I don't want to use 2FA.",
+  "diviGoToken": "Serial Number on Back",
+  "diviGoTokenContinue": "Continue",
+  "twoFaConfrimCode": "Code Here",
+  "twoFaConfrim": "Confirm",
+  "twoFaContinue": "Continue",
+  "twoFaConfrimEnter": "Confirm",
+  "twoFaConfrimCodeEnter": "Code Here",
+  "pinCodeUser": "New PIN Code",
+  "pinCodeUserContinue": "Continue",
+  "loadingTitle": "Please Wait",
+  "loadingText": "We are loding now!",
+  "advancedReady": "Your advanced account is ready!",
+  "advancedReadyText": "There is nothing left to do here, you are all set! Please continue in ROUTE_NAME",
+  "languages": {
+    "english": { "name": "English", "image": "usa.png", "code": "en" },
+    "spanish": { "name": "Español", "image": "esp.png", "code": "es" },
+    "japanese": { "name": "日本", "image": "jpn.png", "code": "" },
+    "italian": { "name": "Italiano", "image": "ita.png", "code": "" },
+    "french": { "name": "Français", "image": "fra.png", "code": "" },
+    "korean": { "name": "한국어", "image": "kor.png", "code": "" },
+    "czech": { "name": "Čeština", "image": "cze.png", "code": "" },
+    "portuguese": { "name": "Português", "image": "por.png", "code": "" },
+    "chinese_traditional": {
+      "name": "繁體中文",
+      "image": "chi.png",
+      "code": ""
+    }
+  },
+  "currencies": {
+    "english": { "name": "USD", "image": "usa.png", "code": "en" },
+    "spanish": { "name": "MXN", "image": "mxn.png", "code": "es" },
+    "japanese": { "name": "JPY", "image": "jpn.png", "code": "" },
+    "italian": { "name": "EUR", "image": "ita.png", "code": "" },
+    "french": { "name": "EUR", "image": "fra.png", "code": "" },
+    "korean": { "name": "KRW", "image": "kor.png", "code": "" },
+    "czech": { "name": "CZK", "image": "cze.png", "code": "" },
+    "portuguese": { "name": "EUR", "image": "por.png", "code": "" },
+    "chinese_traditional": { "name": "CNY", "image": "chi.png", "code": "" }
+  },
+  "FAQs": [
+    {
+      "question": "Question One",
+      "answer": "This is the answer for Question 1."
+    },
+    {
+      "question": "Question Two",
+      "answer": "This is the answer for Question Two."
+    }
+  ]
+}

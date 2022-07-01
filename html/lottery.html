@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Lottery</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div id="Lottery"></div>
+    <script src="js/jquery.min.js"></script>
+    <script>
+      const BLOCKS_TO_LOTTERY = 10080
+      const REFRESH_EVERY = 60 * 1000
+      const MINUTES_PER_HOUR = 60
+      const HOURS_PER_DAY = 24
+
+      const numberWithCommas = x => {
+        var parts = x.toString().split('.')
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        return parts.join('.')
+      }
+
+      const getBlockCount = async _ =>
+        parseInt(JSON.parse(await $.get('/lotteryData/blockcount')))
+
+      const main = async _ => {
+        const block = await getBlockCount()
+        if (block) {
+          const blocksSinceLast = block % BLOCKS_TO_LOTTERY
+          const pendingBlocks = BLOCKS_TO_LOTTERY - blocksSinceLast
+          const nextLottery = block + pendingBlocks
+          let minutes = pendingBlocks
+          let hours =
+            minutes >= MINUTES_PER_HOUR
+              ? parseInt(minutes / MINUTES_PER_HOUR)
+              : 0
+          minutes -= hours * MINUTES_PER_HOUR
+          let days =
+            hours >= HOURS_PER_DAY ? parseInt(hours / HOURS_PER_DAY) : 0
+          hours -= days * HOURS_PER_DAY
+          const now = new Date()
+          now.setMinutes(now.getMinutes() + pendingBlocks)
+          $('#Lottery').html(
+            'Block: ' +
+              numberWithCommas(block) +
+              '<br />Next Lottery: ' +
+              numberWithCommas(nextLottery) +
+              '<br />Blocks to go: ' +
+              numberWithCommas(pendingBlocks) +
+              '<br />Time to go: ' +
+              [
+                days > 0
+                  ? days +
+                    ' day' +
+                    (days == 1 ? '' : 's') +
+                    (hours || minutes ? ',' : '')
+                  : '',
+                hours > 0
+                  ? hours +
+                    ' hour' +
+                    (hours == 1 ? '' : 's') +
+                    (minutes ? ',' : '')
+                  : '',
+                minutes > 0
+                  ? minutes + ' minute' + (minutes == 1 ? '' : 's')
+                  : ''
+              ]
+                .join(' ')
+                .trim() +
+              '<br />On: ' +
+              now.toDateString() +
+              ' at ' +
+              now.toTimeString().split(' ')[0]
+          )
+        }
+      }
+
+      window.onload = _ => {
+        setInterval(main, REFRESH_EVERY)
+        main()
+      }
+    </script>
+  </body>
+</html>

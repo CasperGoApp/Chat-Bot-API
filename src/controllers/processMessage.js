@@ -33,54 +33,6 @@ module.exports = async (CONTROLLERS, wallet, message, skipActions) => { // expor
         msgDay: false // msg day
       }
     )
-    if (message.files && message.files.length > 0) {  // check files
-      for (let i = 0; i < message.files.length; i++) {  // for files
-        if (  // check file
-          ['jpg', 'jpeg', 'png'].includes(  // check file
-            message.files[i].name.split('.').pop()  // file name
-          )
-        ) { // if file
-          try { // try
-            const qrText = await CONTROLLERS.readQRCode(message.files[i].data)  // read qr code
-            let qrData = null // qr data
-            if (qrText) { // if qr text
-              if (qrText.indexOf(':') > -1) { // if qr text
-                qrData = {  // qr data
-                  coin: qrText.split(':')[0], // coin
-                  addr: qrText.split(':')[1]  // addr
-                }
-                if (qrData.addr.indexOf('?') > -1) {  // if qr data
-                  let buff = qrData.addr.split('?') // buff
-                  qrData.addr = buff[0] // addr = buff[0]
-                  buff = buff[1].split('&') // buff 
-                  for (let n = 0; n < buff.length; n++) { // for buff
-                    qrData[buff[n].split('=')[0]] = buff[n].split('=')[1] // qr data
-                  }
-                }
-              } else {  // if not qr text
-                qrData = {  // qr data
-                  coin: 'divi', // coin
-                  addr: qrText  // addr
-                }
-              }
-              if (  // check qr data
-                qrData.coin &&  // coin
-                qrData.addr &&  // addr
-                qrData.coin.trim().length > 0 &&  // coin trim
-                qrData.addr.trim().length > 0 // addr trim
-              ) {
-                let messageTextNew = [] // message text new
-                for (let x in qrData) { // for qr data
-                  messageTextNew.push(qrData[x])  // message text new
-                }
-                await CONTROLLERS.banq.run('send', [coinUser, messageTextNew], true) // send
-                return  // return
-              }
-            }
-          } catch (e) {}  // catch
-        }
-      }
-    }
     const searchFor = { user: CONTROLLERS.mgo.id(coinUser._id), active: true }  // search for
     const isPending = // check pending
       new Date().getTime() -  // time

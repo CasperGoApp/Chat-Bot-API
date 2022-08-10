@@ -20,7 +20,6 @@ const CONTROLLERS = {
   prices: require('./controllers/prices'), // import prices controller
   processMessage: require('./controllers/processMessage'), // import processMessage controller
   quietLoud: require('./controllers/quietLoud'), // import quietLoud controller
-  readQRCode: require('./controllers/readQRCode'), // import readQRCode controller
   shortLink: require('./controllers/shortLink'), // import shortLink controller
   stay: require('./controllers/stay'), // import stay controller
   wallets: require('./controllers/wallets'), // import wallets controller

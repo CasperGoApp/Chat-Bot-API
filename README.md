@@ -637,16 +637,15 @@ pm2 logs
 
 | Name | Link |
 | ---- | ----- |
-| node-fetch | https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API |
-| bip32 | https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki |
-| crypto | https://node.readthedocs.io/en/latest/api/crypto/ |
-| speakeasy | https://github.com/speakeasyjs/speakeasy/tree/cff2bb42cde5e74c43493a8f26b20e52960df531 |
-| bitcoinjs-lib | https://github.com/bitcoinjs/bitcoinjs-lib |
-| gnodejs | https://github.com/GnomeGroup/gnodejs |
+| node-fetch | https://www.npmjs.com/package/node-fetch |
+| bip32 | https://www.npmjs.com/package/bip32 |
+| speakeasy | https://www.npmjs.com/package/speakeasy |
+| bitcoinjs-lib | https://www.npmjs.com/package/bitcoinjs-lib |
+| gnodejs | https://www.npmjs.com/package/gnodejs |
 | qr-image | https://github.com/alexeyten/qr-image |
-| dotenv | https://github.com/motdotla/dotenv |
+| dotenv | https://www.npmjs.com/package/dotenv |
 | mime-kind | https://github.com/strikeentco/mime-kind |
-| gnome-wallet-address-validator | https://github.com/GnomeGroup/altcoin-address |
+| gnome-wallet-address-validator | https://github.com/GnomeGroup/wallet-address-validator |
 | json-as-xlsx | https://github.com/LuisEnMarroquin/json-as-xlsx |
 | form-data | https://github.com/form-data/form-data |
 | gmongo | https://github.com/GnomeGroup/gmongo |

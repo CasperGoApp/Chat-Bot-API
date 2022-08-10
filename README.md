@@ -643,10 +643,8 @@ pm2 logs
 | speakeasy | https://github.com/speakeasyjs/speakeasy/tree/cff2bb42cde5e74c43493a8f26b20e52960df531 |
 | bitcoinjs-lib | https://github.com/bitcoinjs/bitcoinjs-lib |
 | gnodejs | https://github.com/GnomeGroup/gnodejs |
-| qr-image | https://github.com/alexeyten/qr-image |
 | dotenv | https://github.com/motdotla/dotenv |
 | mime-kind | https://github.com/strikeentco/mime-kind |
-| jimp | https://github.com/oliver-moran/jimp |
 | qrcode-reader | https://github.com/edi9999/jsqrcode/tree/23acbeaed0c5bbcb305a73d378fce252b165590a |
 | gnome-wallet-address-validator | https://github.com/GnomeGroup/altcoin-address |
 | json-as-xlsx | https://github.com/LuisEnMarroquin/json-as-xlsx |

@@ -642,10 +642,10 @@ pm2 logs
 | speakeasy | https://www.npmjs.com/package/speakeasy |
 | bitcoinjs-lib | https://www.npmjs.com/package/bitcoinjs-lib |
 | gnodejs | https://www.npmjs.com/package/gnodejs |
-| qr-image | https://github.com/alexeyten/qr-image |
+| qr-image | https://www.npmjs.com/package/qr-image |
 | dotenv | https://www.npmjs.com/package/dotenv |
-| mime-kind | https://github.com/strikeentco/mime-kind |
+| mime-kind | https://www.npmjs.com/package/mime-kind |
 | gnome-wallet-address-validator | https://github.com/GnomeGroup/wallet-address-validator |
-| json-as-xlsx | https://github.com/LuisEnMarroquin/json-as-xlsx |
-| form-data | https://github.com/form-data/form-data |
-| gmongo | https://github.com/GnomeGroup/gmongo |
+| json-as-xlsx | https://www.npmjs.com/package/json-as-xlsx |
+| form-data | https://www.npmjs.com/package/form-data |
+| gmongo | https://www.npmjs.com/package/gmongo |

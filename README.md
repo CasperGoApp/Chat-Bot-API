@@ -1,4 +1,4 @@
-# CasperGo Version 0.1
+# CasperGo Version 1.0.1
 
 This repository is the base for the CasperGo Version of the LetsGo Mobile Wallet Platform, customized and White-labeled for Casper.
 

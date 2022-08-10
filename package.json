@@ -1,6 +1,6 @@
 {
   "name": "chat-bot-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Chat Bot API used to deliver LetsGo messages",
   "main": "src/server.js",
   "scripts": {

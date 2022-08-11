@@ -14,7 +14,6 @@ const CONTROLLERS = {
   checkUsername: require('./controllers/checkUsername'), // import checkUsername controller
   deposit: require('./controllers/deposit'), // import deposit controller
   earning: require('./controllers/earning'), // import earning controller
-  history: require('./controllers/history'), // import history controller
   isAllowed: require('./controllers/isAllowed'), // import isAllowed controller
   keywords: require('./controllers/keywords'), // import keywords controller
   prices: require('./controllers/prices'), // import prices controller

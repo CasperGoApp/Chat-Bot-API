@@ -595,11 +595,21 @@ echo '[]' > /LOCAL_DIRECTORY/blockMonitor/src/divi.addressList
 echo '[]' > /LOCAL_DIRECTORY/blockMonitor/src/btc.addressList
 ```
 
-#### Step 2.f: Start Processes in PM2
+#### Step 2.f: Install Node Modules
 
 ```bash
-pm2 start /LOCAL_DIRECTORY/blockMonitor/src/server.js
-pm2 start /LOCAL_DIRECTORY/src/server.js
+cd /LOCAL_DIRECTORY
+npm i
+```
+
+#### Step 2.g: Start Processes in PM2
+
+AFTER the UTXO Blockchains have fully syncronized with the network, start the services using PM2 for automatic restart.
+
+```bash
+cd /LOCAL_DIRECTORY
+pm2 start blockMonitor/src/server.js
+pm2 start src/server.js
 pm2 save
 ```
 

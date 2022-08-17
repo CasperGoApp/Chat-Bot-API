@@ -15,16 +15,16 @@
       const MINUTES_PER_HOUR = 60
       const HOURS_PER_DAY = 24
 
-      const numberWithCommas = x => {
+      const numberWithCommas = (x) => {
         var parts = x.toString().split('.')
         parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
         return parts.join('.')
       }
 
-      const getBlockCount = async _ =>
+      const getBlockCount = async (_) =>
         parseInt(JSON.parse(await $.get('/lotteryData/blockcount')))
 
-      const main = async _ => {
+      const main = async (_) => {
         const block = await getBlockCount()
         if (block) {
           const blocksSinceLast = block % BLOCKS_TO_LOTTERY
@@ -64,7 +64,7 @@
                   : '',
                 minutes > 0
                   ? minutes + ' minute' + (minutes == 1 ? '' : 's')
-                  : ''
+                  : '',
               ]
                 .join(' ')
                 .trim() +
@@ -76,7 +76,7 @@
         }
       }
 
-      window.onload = _ => {
+      window.onload = (_) => {
         setInterval(main, REFRESH_EVERY)
         main()
       }

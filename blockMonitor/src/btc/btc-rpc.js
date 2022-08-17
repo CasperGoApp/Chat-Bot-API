@@ -6,10 +6,10 @@ const rpc = new RpcClient({
   pass: process.env.BTC_RPC_PASSWORD,
   host: process.env.BTC_RPC_HOST,
   port: '18332',
-  protocol: 'http'
+  protocol: 'http',
 })
 
-const formatArgs = argarray => {
+const formatArgs = (argarray) => {
   if (!argarray) {
     argarray = []
   }
@@ -22,7 +22,7 @@ const formatArgs = argarray => {
 }
 
 const rpcFunction = (functionName, argarray) =>
-  new Promise(resolve =>
+  new Promise((resolve) =>
     rpc[functionName](
       ...[
         ...formatArgs(argarray),
@@ -34,8 +34,8 @@ const rpcFunction = (functionName, argarray) =>
                 : typeof res.result != 'undefined'
                 ? res.result
                 : res
-            )
-        ]
+            ),
+        ],
       ]
     )
   )

@@ -18,7 +18,7 @@
 
       <!--LOADING-->
 
-      <div id="LoadingInfo" class="animated fadeIn" style="display: none;">
+      <div id="LoadingInfo" class="animated fadeIn" style="display: none">
         <div class="logo-loader animated bounceIn delay-1s">
           <img src="/img/icon-divi.png" />
         </div>
@@ -30,7 +30,7 @@
       <div
         id="ConfirmExistingCode"
         class="animated fadeInUp faster"
-        style="display: none;"
+        style="display: none"
       >
         <h4>Confirm Existing Code</h4>
         <p>
@@ -52,7 +52,7 @@
       <div
         id="ConfirmExistingCodeFailed"
         class="animated fadeInUp faster"
-        style="display: none;"
+        style="display: none"
       >
         <h4 class="warning">Confirm Existing Code Failed</h4>
         <p>
@@ -80,7 +80,7 @@
       <div
         id="ConfirmAmount"
         class="animated fadeInUp faster"
-        style="display: none;"
+        style="display: none"
       >
         <h4>Setup two-factor authentication!</h4>
         <p>
@@ -107,9 +107,9 @@
         </div>
         <p>Country Code:</p>
         <div class="select-box">
-          <select id="countryCode" style="text-align: center;"
-            >COUNTRY_LIST_HTML</select
-          >
+          <select id="countryCode" style="text-align: center">
+            COUNTRY_LIST_HTML
+          </select>
         </div>
         <p>Phone Number:</p>
         <div class="input-box">
@@ -135,7 +135,7 @@
       <div
         id="SelectProvider"
         class="animated fadeInUp faster"
-        style="display: none;"
+        style="display: none"
       >
         <button class="button-store" onclick="providerClicked( 'Google' )">
           Use Google Authenticator
@@ -159,19 +159,19 @@
       <div
         id="UseGoogle"
         class="animated fadeInUp faster"
-        style="display: none;"
+        style="display: none"
       >
         <h4>Use Google Authenticator</h4>
         <p>1- If you have not already, please:</p>
         <a
-          style="display: none;"
+          style="display: none"
           class="button-store"
           id="DownloadGoogleAndroid"
           href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en&gl=US"
           >Download Google Authenticator <i class="ti-android"></i
         ></a>
         <a
-          style="display: none;"
+          style="display: none"
           class="button-store"
           id="DownloadGoogleiOS"
           href="https://apps.apple.com/us/app/google-authenticator/id388497605"
@@ -185,11 +185,7 @@
 
       <!--Use Authy-->
 
-      <div
-        id="UseAuthy"
-        class="animated fadeInUp faster"
-        style="display: none;"
-      >
+      <div id="UseAuthy" class="animated fadeInUp faster" style="display: none">
         <h4>Use Authy</h4>
         <p>1- If you have not already, please:</p>
         <a
@@ -208,7 +204,7 @@
       <div
         id="ConfirmCode"
         class="animated fadeInUp faster"
-        style="display: none;"
+        style="display: none"
       >
         <h4>To complete linking, enter the 2FA code from the app.</h4>
         <div class="input-box">
@@ -228,7 +224,7 @@
         id="SetupSuccess"
         class="animated fadeInUp faster"
         class="animated fadeInUp faster"
-        style="display: none;"
+        style="display: none"
       >
         <h4>Your 2FA has been setup successfully!</h4>
         <div class="icon-box animated bounceIn delay-1s">
@@ -242,7 +238,7 @@
       <div
         id="SetupFailConfirmCodeAgain"
         class="animated fadeInUp faster"
-        style="display: none;"
+        style="display: none"
       >
         <p>
           The code doesn't match what is expected, to complete linking, enter
@@ -262,21 +258,21 @@
     <script type="text/javascript" src="/js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript">
       const myUserCode = 'MY_USER_CODE'
-      const iOS = _ =>
+      const iOS = (_) =>
         [
           'iPad Simulator',
           'iPhone Simulator',
           'iPod Simulator',
           'iPad',
           'iPhone',
-          'iPod'
+          'iPod',
         ].includes(navigator.platform)
-      const checkEmail = email =>
+      const checkEmail = (email) =>
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
           email
         )
       const serverComm = (dataToSend, callback) =>
-        $.post('/auth/', { ...dataToSend, ...{ send: true } }, result =>
+        $.post('/auth/', { ...dataToSend, ...{ send: true } }, (result) =>
           callback(result)
         )
 
@@ -284,8 +280,8 @@
       let userEmail = null
       let userPhone = null
 
-      window.onload = _ =>
-        serverComm({ code: myUserCode }, result => {
+      window.onload = (_) =>
+        serverComm({ code: myUserCode }, (result) => {
           userData = result
           console.log(userData)
           if (!userData) {
@@ -310,8 +306,8 @@
                 i < document.getElementById('countryCode').options.length;
                 i++
               ) {
-                const thisValue = document.getElementById('countryCode')
-                  .options[i].value
+                const thisValue =
+                  document.getElementById('countryCode').options[i].value
                 if (
                   thisValue &&
                   !setCountryCode &&
@@ -343,7 +339,7 @@
           }
         })
 
-      const maxAmountSet = amount => {
+      const maxAmountSet = (amount) => {
         $('#LoadingInfo').show()
         $('#ConfirmAmount').hide()
         serverComm(
@@ -352,9 +348,9 @@
             updateAmount: parseFloat(amount),
             updateEmail: userEmail,
             updatePhoneNumber: userPhone,
-            updateCountryCode: $('#countryCode').val()
+            updateCountryCode: $('#countryCode').val(),
           },
-          result => {
+          (result) => {
             userData = result
             if (userData.max) {
               $('#Max2faPer').val(userData.max)
@@ -373,12 +369,12 @@
         )
       }
 
-      const providerClicked = provider => {
+      const providerClicked = (provider) => {
         $('#Use' + provider).show()
         $('#SelectProvider').hide()
       }
 
-      const checkContinueButton = _ => {
+      const checkContinueButton = (_) => {
         if (userEmail && userPhone) {
           $('#isEmailEnteredContinue').show()
         } else {
@@ -386,17 +382,17 @@
         }
       }
 
-      const emailChanged = emailValue => {
+      const emailChanged = (emailValue) => {
         userEmail = emailValue
         checkContinueButton()
       }
 
-      const phoneChanged = phoneValue => {
+      const phoneChanged = (phoneValue) => {
         userPhone = phoneValue
         checkContinueButton()
       }
 
-      const clickContinue = provider => {
+      const clickContinue = (provider) => {
         if (
           confirm(
             'This process will take you to the app, ' +
@@ -406,22 +402,25 @@
         ) {
           $('#LoadingInfo').show()
           $('#Use' + provider).hide()
-          serverComm({ code: myUserCode, selectProvider: provider }, result => {
-            if (result.link) {
-              document.location.href = result.link
+          serverComm(
+            { code: myUserCode, selectProvider: provider },
+            (result) => {
+              if (result.link) {
+                document.location.href = result.link
+              }
+              $('#LoadingInfo').hide()
+              $('#ConfirmCode').show()
             }
-            $('#LoadingInfo').hide()
-            $('#ConfirmCode').show()
-          })
+          )
         }
       }
 
-      const confirmCode = code => {
+      const confirmCode = (code) => {
         if (code.length > 5) {
           $('#ConfirmCode').hide()
           $('#LoadingInfo').show()
           $('#SetupFailConfirmCodeAgain').hide()
-          serverComm({ code: myUserCode, confirmFirstCode: code }, result => {
+          serverComm({ code: myUserCode, confirmFirstCode: code }, (result) => {
             $('#LoadingInfo').hide()
             if (result) {
               $('#SetupSuccess').show()
@@ -433,12 +432,12 @@
         }
       }
 
-      const checkExistingCode = code => {
+      const checkExistingCode = (code) => {
         if (code.length > 5) {
           $('#ConfirmExistingCode').hide()
           $('#ConfirmExistingCodeFailed').hide()
           $('#LoadingInfo').show()
-          serverComm({ code: myUserCode, validateToUpdate: code }, result => {
+          serverComm({ code: myUserCode, validateToUpdate: code }, (result) => {
             $('#LoadingInfo').hide()
             if (result) {
               userData.codeOkToUpdate = new Date().getTime()

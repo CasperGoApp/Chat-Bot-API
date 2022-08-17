@@ -118,14 +118,14 @@
 
     <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
-      const PHONE_ID = 'PHONEID'
+      const PHONE_ID = "PHONEID";
 
-      const setupAvanced = async _ => {
-        const accountLink = await $.post('/getAdvancedLink', { id: PHONE_ID })
-        if (typeof accountLink == 'string' && accountLink.length < 10) {
-          document.location = '/start/' + accountLink
+      const setupAvanced = async (_) => {
+        const accountLink = await $.post("/getAdvancedLink", { id: PHONE_ID });
+        if (typeof accountLink == "string" && accountLink.length < 10) {
+          document.location = "/start/" + accountLink;
         }
-      }
+      };
     </script>
   </body>
 </html>

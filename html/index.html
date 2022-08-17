@@ -32,7 +32,7 @@
               data-aos-easing="ease-in-sine"
             >
               <div class="logo">
-                <a href="#home"><img src="img/logo.png"/></a>
+                <a href="#home"><img src="img/logo.png" /></a>
               </div>
 
               <div class="nav-mobile"><i class="ti-menu"></i></div>
@@ -50,8 +50,16 @@
 
       <div class="content">
         <div class="home-img">
-          <img src="img/wallet.png" data-aos="fade-left" data-aos-easing="ease-in-sine" />
-          <img src="img/wallet-bg.png" data-aos="fade-right" data-aos-easing="ease-in-sine" />
+          <img
+            src="img/wallet.png"
+            data-aos="fade-left"
+            data-aos-easing="ease-in-sine"
+          />
+          <img
+            src="img/wallet-bg.png"
+            data-aos="fade-right"
+            data-aos-easing="ease-in-sine"
+          />
         </div>
 
         <!-- Swiper -->
@@ -68,8 +76,8 @@
             <div class="swiper-slide">
               <h2>Multiple connections</h2>
               <p>
-                CasperGo gives you connection with every service from your mobile
-                phone, no difficult logins, no tricks!
+                CasperGo gives you connection with every service from your
+                mobile phone, no difficult logins, no tricks!
               </p>
             </div>
           </div>
@@ -267,17 +275,13 @@
                   <div class="neon-box">
                     <h2>"PRICE"</h2>
                   </div>
-                  <p>
-                    Displays the current market prices.
-                  </p>
+                  <p>Displays the current market prices.</p>
                 </div>
                 <div class="swiper-slide">
                   <div class="neon-box">
                     <h2>PERFORMANCE</h2>
                   </div>
-                  <p>
-                    See how well your wallet is performing.
-                  </p>
+                  <p>See how well your wallet is performing.</p>
                 </div>
                 <div class="swiper-slide">
                   <div class="neon-box">
@@ -371,8 +375,8 @@
         <div class="faq-panel animated fadeIn" id="faq-3">
           <p>
             <strong class="txt-red">CasperGo</strong> is developed and
-            maintained by <b>LetsGo</b>. It is built to add to
-            the overall ecosystem.
+            maintained by <b>LetsGo</b>. It is built to add to the overall
+            ecosystem.
           </p>
         </div>
         <div class="faq-panel animated fadeIn" id="faq-4">
@@ -454,12 +458,12 @@
       <div class="content flex">
         <div class="colx2">
           <p>
-            Copyright &copy;2022 CasperGo All rights reserved.<br />Built
-            & powered by <a href="#">LetsGo</a>.
+            Copyright &copy;2022 CasperGo All rights reserved.<br />Built &
+            powered by <a href="#">LetsGo</a>.
           </p>
         </div>
         <div class="colx2">
-          <a href="#"><img src="img/iconCasperGo.png" width="100"/></a>
+          <a href="#"><img src="img/iconCasperGo.png" width="100" /></a>
         </div>
       </div>
     </div>
@@ -480,23 +484,23 @@
         mobileDropdown: true,
         mobileBreakpoint: 768,
         scrollSpy: true,
-        onScrollStart: function() {
+        onScrollStart: function () {
           $scrollStatus.show()
           $scrollStatus.text('Started scrolling')
         },
-        onScrollEnd: function() {
+        onScrollEnd: function () {
           $scrollStatus.text('Scrolling ended')
-          setTimeout(function() {
+          setTimeout(function () {
             $scrollStatus.fadeOut(200)
           }, 1000)
-        }
+        },
       })
 
       $('.click-me').navScroll({
-        navHeight: 0
+        navHeight: 0,
       })
 
-      $('.nav').on('click', '.nav-mobile', function(e) {
+      $('.nav').on('click', '.nav-mobile', function (e) {
         e.preventDefault()
         $('.nav ul').slideToggle('fast')
       })
@@ -504,7 +508,7 @@
       // MENU ANIMATION
 
       // When the user scrolls the page, execute myFunction
-      window.onscroll = function() {
+      window.onscroll = function () {
         myFunction()
       }
 
@@ -529,37 +533,37 @@
         spaceBetween: 30,
         pagination: {
           el: '.swiper-pagination1',
-          clickable: true
+          clickable: true,
         },
         autoplay: {
           delay: 5000,
-          disableOnInteraction: false
+          disableOnInteraction: false,
         },
-        loop: true
+        loop: true,
       })
       var swiper2 = new Swiper('.swiper2', {
         spaceBetween: 30,
         pagination: {
           el: '.swiper-pagination2',
-          clickable: true
+          clickable: true,
         },
         autoplay: {
           delay: 5000,
-          disableOnInteraction: false
+          disableOnInteraction: false,
         },
         loop: true,
         navigation: {
           nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
+          prevEl: '.swiper-button-prev',
         },
-        effect: 'flip'
+        effect: 'flip',
       })
 
       // TABS WITH SELECT
 
-      $('#sectionChooser').change(function() {
+      $('#sectionChooser').change(function () {
         var myID = $(this).val()
-        $('.faq-panel').each(function() {
+        $('.faq-panel').each(function () {
           myID === $(this).attr('id') ? $(this).show() : $(this).hide()
         })
       })

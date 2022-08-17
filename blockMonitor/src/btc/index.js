@@ -8,7 +8,7 @@ const BTC_RPC = require('./btc-rpc')
 
 const network = require('../networks')[process.env.BTC_NETWORK_TYPE].btc
 
-const getHashFromAddress = address =>
+const getHashFromAddress = (address) =>
   bitcoinjs.address.fromBase58Check(address).hash.toString('hex')
 
 const btc = {
@@ -42,7 +42,7 @@ const btc = {
                     block,
                     amount: thisTx.value,
                     tx: tx.vin[n],
-                    txid: tx.vin[n].txid
+                    txid: tx.vin[n].txid,
                   })
                 }
               } else if (thisTx && thisTx.value && thisTx.value > 0) {
@@ -72,7 +72,7 @@ const btc = {
                   block,
                   amount: tx.vout[n].value,
                   vout: tx.vout[n].n,
-                  txid: tx.txid
+                  txid: tx.txid,
                 })
               }
             } else if (tx.vout[n].value > 0) {
@@ -85,18 +85,20 @@ const btc = {
     return addresses
   },
   block: {
-    count: _ => BTC_RPC.getBlockCount(),
-    hash: block => BTC_RPC.getBlockHash(block),
-    get: hash => BTC_RPC.getBlock(hash),
-    getTxs: async block =>
+    count: (_) => BTC_RPC.getBlockCount(),
+    hash: (block) => BTC_RPC.getBlockHash(block),
+    get: (hash) => BTC_RPC.getBlock(hash),
+    getTxs: async (block) =>
       await btc.getTxsInList(
-        (await btc.block.get(await btc.block.hash(block))).tx,
+        (
+          await btc.block.get(await btc.block.hash(block))
+        ).tx,
         block
-      )
+      ),
   },
   mempool: {
-    get: _ => BTC_RPC.getRawMemPool(),
-    getTxs: async _ => {
+    get: (_) => BTC_RPC.getRawMemPool(),
+    getTxs: async (_) => {
       const txList = await btc.mempool.get()
       const txs = []
       for (let i = 0; i < txList.length; i++) {
@@ -105,44 +107,44 @@ const btc = {
         }
       }
       return await btc.getTxsInList(txs, -1)
-    }
+    },
   },
-  balance: async _ => {
+  balance: async (_) => {
     const balance = await BTC_RPC.getBalance()
     return { balance, total: balance }
   },
   get: {
-    rawTx: txid => BTC_RPC.getRawTransaction(txid),
-    fromRaw: tx => BTC_RPC.decodeRawTransaction(tx),
-    tx: async txid => {
+    rawTx: (txid) => BTC_RPC.getRawTransaction(txid),
+    fromRaw: (tx) => BTC_RPC.decodeRawTransaction(tx),
+    tx: async (txid) => {
       if (!btc.txList[txid]) {
         btc.txList[txid] = await btc.get.fromRaw(await btc.get.rawTx(txid))
       }
       return btc.txList[txid]
-    }
+    },
   },
   txList: {},
   mnsync: {
-    status: _ => BTC_RPC.mnSync('status'),
-    reset: _ => BTC_RPC.mnSync('reset')
+    status: (_) => BTC_RPC.mnSync('status'),
+    reset: (_) => BTC_RPC.mnSync('reset'),
   },
   import: {
     address: (address, label, reScan) =>
       BTC_RPC.importAddress(address, label, reScan),
-    key: (key, label, reScan) => BTC_RPC.importPrivKey(key, label, reScan)
+    key: (key, label, reScan) => BTC_RPC.importPrivKey(key, label, reScan),
   },
-  sendTx: transactionHex => BTC_RPC.sendRawTransaction(transactionHex),
-  updateLastBlock: newBlock =>
+  sendTx: (transactionHex) => BTC_RPC.sendRawTransaction(transactionHex),
+  updateLastBlock: (newBlock) =>
     APP.files.write(__dirname + '/btc.lastBlock', newBlock.toString()),
-  getLastBlock: _ =>
+  getLastBlock: (_) =>
     APP.files.exists(__dirname + '/btc.lastBlock')
       ? parseInt(APP.files.read(__dirname + '/btc.lastBlock'))
-      : 0
+      : 0,
 }
 
 const cron = {
-  updateAddress: async _ => {},
-  add: addressUpdate => {
+  updateAddress: async (_) => {},
+  add: (addressUpdate) => {
     cron.updateAddress = addressUpdate
     cron.mem.start = new Date().getTime()
     cron.mem.lastBlock = btc.getLastBlock()
@@ -157,10 +159,10 @@ const cron = {
     isTenRunning: false,
     addresses: {},
     addressListFile: null,
-    addressListUpdateTriggerFile: null
+    addressListUpdateTriggerFile: null,
   },
   second: {
-    ten: async _ => {
+    ten: async (_) => {
       if (!cron.mem.isTenRunning) {
         cron.mem.isTenRunning = true
         if (
@@ -182,18 +184,18 @@ const cron = {
         }
         cron.mem.isTenRunning = false
       }
-    }
+    },
   },
   minute: {
-    five: async _ => {
+    five: async (_) => {
       const thisBalance = await btc.balance()
       if (thisBalance.total != cron.mem.lastTotalBalance) {
         cron.mem.lastTotalBalance = thisBalance.total
         console.log('New Balance:', cron.mem.lastTotalBalance)
       }
-    }
+    },
   },
-  indexAddresses: async _ => {
+  indexAddresses: async (_) => {
     const thisBlock = await btc.block.count()
     if (thisBlock) {
       if (!cron.mem.lastBlock) {
@@ -213,14 +215,14 @@ const cron = {
       }
     }
   },
-  checkAddressList: _ => {
+  checkAddressList: (_) => {
     if (cron.mem.addressListFile && cron.mem.addressListFile.length > 0) {
       const addressList = APP.files.read(cron.mem.addressListFile)
       if (addressList && addressList.length > 0) {
         module.exports.updateAddressList(APP.parse(addressList))
       }
     }
-  }
+  },
 }
 
 module.exports = {
@@ -235,11 +237,11 @@ module.exports = {
     console.log(await BTC_RPC.loadWallet('testwallet'))
     cron.add(addressUpdate)
   },
-  updateAddressList: addressList => {
+  updateAddressList: (addressList) => {
     const addressesList = {}
     for (let i = 0; i < addressList.length; i++) {
       addressesList[addressList[i]] = true
     }
     cron.mem.addresses = addressesList
-  }
+  },
 }

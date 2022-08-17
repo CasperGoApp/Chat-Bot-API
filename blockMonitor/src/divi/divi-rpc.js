@@ -5,10 +5,10 @@ const rpc = new RpcClient({
   user: process.env.DIVI_RPC_USER,
   pass: process.env.DIVI_RPC_PASSWORD,
   host: process.env.DIVI_RPC_HOST,
-  protocol: 'http'
+  protocol: 'http',
 })
 
-const formatArgs = argarray => {
+const formatArgs = (argarray) => {
   if (!argarray) {
     argarray = []
   }
@@ -21,7 +21,7 @@ const formatArgs = argarray => {
 }
 
 const rpcFunction = (functionName, argarray) =>
-  new Promise(resolve =>
+  new Promise((resolve) =>
     rpc[functionName](
       ...[
         ...formatArgs(argarray),
@@ -33,8 +33,8 @@ const rpcFunction = (functionName, argarray) =>
                 : typeof res.result != 'undefined'
                 ? res.result
                 : res
-            )
-        ]
+            ),
+        ],
       ]
     )
   )

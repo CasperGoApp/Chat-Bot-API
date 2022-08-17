@@ -310,11 +310,11 @@
     <script type="text/javascript" src="/js/ux.js?16"></script>
     <script type="text/javascript" src="/js/load.js?16"></script>
     <script type="text/javascript">
-      const KEY_SERVER = 'https://keys.gnome.one/'
-      const ROUTE_NAME = 'ROUTENAME'
-      const PHONE_NUMBER = 'PHONENUMBER'
-      const PHONE_ID = 'PHONEID'
-      const USER_DATA = USER_INFORMATION
+      const KEY_SERVER = "https://keys.gnome.one/";
+      const ROUTE_NAME = "ROUTENAME";
+      const PHONE_NUMBER = "PHONENUMBER";
+      const PHONE_ID = "PHONEID";
+      const USER_DATA = USER_INFORMATION;
       let lang,
         mnemonic,
         seed,
@@ -325,24 +325,24 @@
         tfaCode,
         userPINCode,
         tfaType,
-        language = null
-      let screen = 0
-      let openQuestion = 0
-      let screenHistory = []
-      let isLoading = false
-      const langCodes = { en: 'english', es: 'spanish' }
+        language = null;
+      let screen = 0;
+      let openQuestion = 0;
+      let screenHistory = [];
+      let isLoading = false;
+      const langCodes = { en: "english", es: "spanish" };
 
-      window.onload = onload
+      window.onload = onload;
 
       function main() {
-        var x = document.getElementById('myTopnav')
-        if (x.className === 'topnav') {
-          x.className += ' responsive'
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
         } else {
-          x.className = 'topnav'
+          x.className = "topnav";
         }
       }
-      main()
+      main();
     </script>
   </body>
 </html>

@@ -21,6 +21,8 @@
     "@gnometech/divid-rpc": "^3.0.87",
     "bip32": "^2.0.6",
     "bitcoinjs-lib": "^5.2.0",
+    "casper-js-sdk": "^2.10.0",
+    "casper-storage": "^0.2.5",
     "coingecko-api": "^1.0.10",
     "crypto-random-int": "^1.0.1",
     "dotenv": "^10.0.0",
@@ -45,7 +47,7 @@
   },
   "jest": {
     "testPathIgnorePatterns": [
-      "milestone.2.test.js",
+      "milestone.1.test.js",
       "milestone.3.test.js",
       "milestone.4.test.js"
     ],

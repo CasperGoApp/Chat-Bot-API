@@ -174,7 +174,7 @@ it('Has functioning API integrations with Price Servers', async () => {
 
 it('Has functioning API integrations with IPFS Gateways', async () => {
   const ipfs = require('./src/helpers/ipfs')
-  //console.log(await ipfs('test.txt', 'test'))
+  console.log(await ipfs('test.txt', 'test'))
   //expect(12).toBe(123)
 })
 

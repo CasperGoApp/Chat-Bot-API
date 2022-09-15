@@ -189,10 +189,6 @@ it('Has functioning API integrations with Internal DIVI Server API', async () =>
   expect(await DIVI_RPC.getBlockCount()).toBeGreaterThanOrEqual(0)
 })
 
-/*
-- Has functioning API integrations with Price Servers (Coin Gecko, Coin Market Cap, FIAT Exchange Rate Services), IPFS Gateways, Internal Block Server APIs, Internal Bitcoin Server API, Internal DIVI Server API
- */
-
 /* 
 Milestone 2 Acceptance Criteria
 The public website from milestone #1 will be updated and connected to the Casper Testnet. This website will be able to:

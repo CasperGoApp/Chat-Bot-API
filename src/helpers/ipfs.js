@@ -23,7 +23,9 @@ const ipfs = async (name, data) => {
     // try
     const result = await serverResponse.json() // result
     return result && result.Hash ? result.Hash : null // return result Hash else null
-  } catch (e) {} // catch
+  } catch (e) {
+    console.log(e)
+  } // catch
 }
 
 module.exports = ipfs // export ipfs

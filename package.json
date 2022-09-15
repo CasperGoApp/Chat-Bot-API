@@ -4,7 +4,7 @@
   "description": "Chat Bot API used to deliver LetsGo messages",
   "main": "src/server.js",
   "scripts": {
-    "test": "src/test.js"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
     "gmongo": "^2.0.7",
     "gnodejs": "^2.1.2",
     "gnome-wallet-address-validator": "git+https://github.com/GnomeGroup/wallet-address-validator.git",
+    "jest": "^29.0.3",
     "json-as-xlsx": "^2.1.0",
     "mime-kind": "^3.0.0",
     "node-fetch": "^2.6.1",

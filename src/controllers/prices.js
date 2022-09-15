@@ -57,7 +57,7 @@ const prices = {
       (
         (prices.prices.fiat[fiat.toLowerCase()]
           ? prices.prices.fiat[fiat.toLowerCase()]
-          : 0) * // fiat
+          : 1) * // fiat
         (prices.prices[coin.toLowerCase()] // price
           ? 1 / prices.prices[coin.toLowerCase()] // 1 / prices.prices[coin.toLowerCase()]
           : 0) * // 1 / prices

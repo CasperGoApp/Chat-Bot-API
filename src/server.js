@@ -6,6 +6,7 @@ const speakeasy = require('speakeasy') // import speakeasy
 
 // declaring CONTROLLERS object
 const CONTROLLERS = {
+  started: false, // started
   db: process.env.MONGO_DBNAME, // database name from env
   mgo: require('gmongo'), // import gmongo
   banq: require('./banq'), // import banq
@@ -37,7 +38,7 @@ const saveUpdate = async (updateToMessage) => console.log(updateToMessage)
 // start CONTROLLERS with gmongo connection and pass providers
 CONTROLLERS.messages.start(
   CONTROLLERS, // controllers object
-  [], //['telegram', 'signal'], // providers array
+  ['botmaker'], //['telegram', 'signal'], // providers array
   (
     message // message callback
   ) =>
@@ -448,13 +449,28 @@ const start = async (_) => {
   )
 
   await APP.xpr.start(process.env.SERVER_PORT) // start xpr
-  console.log(
-    // log
-    process.env.SERVER_NAME + // server name
-      ' online in ' + // online in
-      parseInt((new Date().getTime() - started.getTime()) / 1000) + // parse int
-      's' // s
-  ) // log
+  if (!CONTROLLERS.starting) {
+    console.log(
+      // log
+      process.env.SERVER_NAME + // server name
+        ' online in ' + // online in
+        parseInt((new Date().getTime() - started.getTime()) / 1000) + // parse int
+        's' // s
+    ) // log
+  }
+  CONTROLLERS.started = true
 } // start
+
+module.exports = (_) =>
+  new Promise(async (resolve) => {
+    CONTROLLERS.starting = true
+    const sleep = (milliseconds) =>
+      new Promise((resolve) => setTimeout(resolve, milliseconds))
+
+    while (!CONTROLLERS.started) {
+      await sleep(500)
+    }
+    resolve(CONTROLLERS)
+  })
 
 start() // start

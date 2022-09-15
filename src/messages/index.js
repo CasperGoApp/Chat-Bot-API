@@ -70,6 +70,8 @@ const getRecents = async (time, existingUsers, field) => {
   return recentMessages // recent messages
 }
 
+const IS_TEST = true
+
 const messages = {
   // messages
   start: (oCONTROLLERS, providerList, saveMessages) => {
@@ -98,10 +100,40 @@ const messages = {
           canInstall = !!process.env.SOURCE_NUMBER // can install
           break // break
       }
-      if (canInstall) {
+      if (canInstall || IS_TEST) {
         // can install
-        providers[providerList[i]] = require('./' + providerList[i]) // provider
-        providers[providerList[i]].load(saveMessages) // load
+        if (IS_TEST) {
+          providers[providerList[i]] = {
+            send: {
+              textOther: async (to, message, platform) => ({
+                to,
+                message,
+                platform,
+              }),
+              text: async (to, message, platform) => ({
+                to,
+                message,
+                platform,
+              }),
+              template: async (to, name, params, platform) => ({
+                to,
+                name,
+                params,
+                platform,
+              }),
+              file: async (to, file, caption, ext, platform) => ({
+                to,
+                file,
+                caption,
+                ext,
+                platform,
+              }),
+            },
+          }
+        } else {
+          providers[providerList[i]] = require('./' + providerList[i]) // provider
+          providers[providerList[i]].load(saveMessages) // load
+        }
       }
     }
   },

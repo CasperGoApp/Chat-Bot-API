@@ -44,6 +44,11 @@
     "semi": false
   },
   "jest": {
-    "testPathIgnorePatterns": ["milestone.2.test.js", "milestone.3.test.js", "milestone.4.test.js"]
+    "testPathIgnorePatterns": [
+      "milestone.2.test.js",
+      "milestone.3.test.js",
+      "milestone.4.test.js"
+    ],
+    "globalTeardown": "<rootDir>/jest.teardown.js"
   }
 }

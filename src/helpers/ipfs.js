@@ -14,9 +14,15 @@ const ipfs = async (name, data) => {
   const serverResponse = await fetch('https://ipfs.infura.io:5001/api/v0/add', {
     // serverResponse
     method: 'POST', // method
-    /*headers: {
-      Authorization: 'Basic ' + Buffer.from('PROJECT:SECRET').toString('base64')
-    },*/
+    headers: {
+      Authorization:
+        'Basic ' +
+        Buffer.from(
+          process.env.INFURA_PROJECT_ID +
+            ':' +
+            process.env.INFURA_PROJECT_SECRET
+        ).toString('base64'),
+    },
     body: form, // body
   }) // fetch
   try {

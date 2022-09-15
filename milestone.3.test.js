@@ -30,31 +30,35 @@ it('Incoming Balance Monitor is configurable by user', async () => {
 it('Account block limits are editable by admin', async () => {
   const userID = '63141254561e67c565f79b06'
   const maxUSDPerMonth = 100
-  console.log(
-    await CONTROLLERS.mgo.update(
-      CONTROLLERS.db,
-      'Users',
-      { _id: CONTROLLERS.mgo.id(userID) },
-      {
-        aml: {
-          limit: maxUSDPerMonth,
-          added: new Date(),
-        },
-      }
-    )
-  )
+  expect(
+    (
+      await CONTROLLERS.mgo.update(
+        CONTROLLERS.db,
+        'Users',
+        { _id: CONTROLLERS.mgo.id(userID) },
+        {
+          aml: {
+            limit: maxUSDPerMonth,
+            added: new Date(),
+          },
+        }
+      )
+    ).modifiedCount
+  ).toBe(0)
 })
 
 it('Accounts can be enabled and disabled by admin', async () => {
   const userID = '63141254561e67c565f79b06'
-  console.log(
-    await CONTROLLERS.mgo.update(
-      CONTROLLERS.db,
-      'Users',
-      { _id: CONTROLLERS.mgo.id(userID) },
-      {
-        active: false,
-      }
-    )
-  )
+  expect(
+    (
+      await CONTROLLERS.mgo.update(
+        CONTROLLERS.db,
+        'Users',
+        { _id: CONTROLLERS.mgo.id(userID) },
+        {
+          active: false,
+        }
+      )
+    ).modifiedCount
+  ).toBe(0)
 })

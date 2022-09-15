@@ -179,18 +179,13 @@ it('Has functioning API integrations with IPFS Gateways', async () => {
 })
 
 it('Has functioning API integrations with Internal Bitcoin Server API', async () => {
-  //getblockcount
-  //expect(12).toBe(123)
   const BTC_RPC = require('./blockMonitor/src/btc/btc-rpc')
-  console.log(await BTC_RPC.loadWallet('testwallet'))
-  console.log('BTC_RPC.getBlockCount', await BTC_RPC.getBlockCount())
+  expect(await BTC_RPC.getBlockCount()).toBeGreaterThanOrEqual(0)
 })
 
 it('Has functioning API integrations with Internal DIVI Server API', async () => {
-  //getblockcount
-  //expect(12).toBe(123)
   const DIVI_RPC = require('./blockMonitor/src/divi/divi-rpc')
-  console.log('DIVI_RPC.getBlockCount', await DIVI_RPC.getBlockCount())
+  expect(await DIVI_RPC.getBlockCount()).toBeGreaterThanOrEqual(0)
 })
 
 /*

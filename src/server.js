@@ -449,7 +449,6 @@ const start = async (_) => {
   )
 
   await APP.xpr.start(process.env.SERVER_PORT) // start xpr
-  console.log('express started')
   if (!CONTROLLERS.starting) {
     console.log(
       // log

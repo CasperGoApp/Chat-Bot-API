@@ -12,6 +12,8 @@ Milestone 4 Acceptance Criteria
 - User can import existing keys from another format
 - Website will verify appropriate keys
 - Casper Signer integration to sign transactions
+- Can Stake
+- Can Unstake CSPR
 */
 
 it('PENDING', async () => {

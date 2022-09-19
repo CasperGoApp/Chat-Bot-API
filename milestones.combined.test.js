@@ -340,14 +340,14 @@ Milestone 4 Acceptance Criteria
 - Can Undelegate CSPR
 */
 
-it('User can generate new keys via BIP39 standard', async () => {
+it('MS4: User can generate new keys via BIP39 standard', async () => {
   const CSPR = require('./src/coins/blockchain/casper')
   expect(
     (await CSPR.mnemonic.generate('english')).mnemonic.length
   ).toBeGreaterThanOrEqual(0)
 })
 
-it('User can restore keys via BIP39 standard', async () => {
+it('MS4: User can restore keys via BIP39 standard', async () => {
   const CSPR = require('./src/coins/blockchain/casper')
   expect(
     (
@@ -361,7 +361,7 @@ it('User can restore keys via BIP39 standard', async () => {
   )
 })
 
-it('User can import existing keys from another format', async () => {
+it('MS4: User can import existing keys from another format', async () => {
   const CSPR = require('./src/coins/blockchain/casper')
   expect(
     (
@@ -375,7 +375,7 @@ it('User can import existing keys from another format', async () => {
   )
 })
 
-it('Website will verify appropriate keys', async () => {
+it('MS4: Website will verify appropriate keys', async () => {
   const CSPR = require('./src/coins/blockchain/casper')
   expect(
     (
@@ -389,7 +389,7 @@ it('Website will verify appropriate keys', async () => {
   )
 })
 
-it('Casper Signer integration to sign transactions', async () => {
+it('MS4: Casper Signer integration to sign transactions', async () => {
   const CSPR = require('./src/coins/blockchain/casper')
   const seed =
     '0a9f5af74e82f1839101d76348afac7c758b67c9390adc38e64e1c754e6929593e6700962b35ec0721e30a61011f7cfae394d9c1354d4281653ba9cf74f33906'
@@ -404,7 +404,7 @@ it('Casper Signer integration to sign transactions', async () => {
   ).toBeGreaterThanOrEqual(0)*/
 })
 
-it('Can Delegate CSPR', async () => {
+it('MS4: Can Delegate CSPR', async () => {
   const CSPR = require('./src/coins/blockchain/casper')
   const seed =
     '0a9f5af74e82f1839101d76348afac7c758b67c9390adc38e64e1c754e6929593e6700962b35ec0721e30a61011f7cfae394d9c1354d4281653ba9cf74f33906'
@@ -413,7 +413,7 @@ it('Can Delegate CSPR', async () => {
   )
 })
 
-it('Can Undelegate CSPR', async () => {
+it('MS4: Can Undelegate CSPR', async () => {
   const CSPR = require('./src/coins/blockchain/casper')
   const seed =
     '0a9f5af74e82f1839101d76348afac7c758b67c9390adc38e64e1c754e6929593e6700962b35ec0721e30a61011f7cfae394d9c1354d4281653ba9cf74f33906'

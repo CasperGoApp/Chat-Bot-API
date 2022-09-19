@@ -15,7 +15,7 @@ Milestone 1 Acceptance Criteria
 - Has a table of strings for internationalization at-will
 - Has functioning API integrations with Price Servers (Coin Gecko, Coin Market Cap, FIAT Exchange Rate Services), IPFS Gateways, Internal Block Server APIs, Internal Bitcoin Server API, Internal DIVI Server API
 */
-it('Prepare multiple messages to multiple users', async () => {
+it('MS1: Prepare multiple messages to multiple users', async () => {
   expect(
     (
       await CONTROLLERS.messages.message(
@@ -51,7 +51,7 @@ it('Prepare multiple messages to multiple users', async () => {
   ).toBe('We cannot share to geoff as they are already using CasperGo.')
 })
 
-it('Prepare multimedia digital content', async () => {
+it('MS1: Prepare multimedia digital content', async () => {
   const qr = require('qr-image') // qr
   let qr_svg = qr.imageSync('test', { type: 'png' })
   expect(
@@ -69,7 +69,7 @@ it('Prepare multimedia digital content', async () => {
   )
 })
 
-it('Sending messages with programmable templates', async () => {
+it('MS1: Sending messages with programmable templates', async () => {
   expect(
     (
       await CONTROLLERS.messages.message(
@@ -83,7 +83,7 @@ it('Sending messages with programmable templates', async () => {
   ).toBe('deposit')
 })
 
-it('Has at least 3 human language translations', async () => {
+it('MS1: Has at least 3 human language translations', async () => {
   expect(
     (
       await CONTROLLERS.messages.message(
@@ -125,7 +125,7 @@ it('Has at least 3 human language translations', async () => {
   )
 })
 
-it('Has a table of strings for internationalization at-will', async () => {
+it('MS1: Has a table of strings for internationalization at-will', async () => {
   expect(
     (
       await CONTROLLERS.messages.message(
@@ -167,25 +167,25 @@ it('Has a table of strings for internationalization at-will', async () => {
   )
 })
 
-it('Has functioning API integrations with Price Servers', async () => {
+it('MS1: Has functioning API integrations with Price Servers', async () => {
   expect(
     CONTROLLERS.prices.fiatToCrypto('BTC', 25000, 'USD')
   ).toBeGreaterThanOrEqual(0)
 })
 
-it('Has functioning API integrations with IPFS Gateways', async () => {
+it('MS1: Has functioning API integrations with IPFS Gateways', async () => {
   const ipfs = require('./src/helpers/ipfs')
   expect(await ipfs('test.txt', 'test')).toBe(
     'QmRf22bZar3WKmojipms22PkXH1MZGmvsqzQtuSvQE3uhm'
   )
 })
 
-it('Has functioning API integrations with Internal Bitcoin Server API', async () => {
+it('MS1: Has functioning API integrations with Internal Bitcoin Server API', async () => {
   const BTC_RPC = require('./blockMonitor/src/btc/btc-rpc')
   expect(await BTC_RPC.getBlockCount()).toBeGreaterThanOrEqual(0)
 })
 
-it('Has functioning API integrations with Internal DIVI Server API', async () => {
+it('MS1: Has functioning API integrations with Internal DIVI Server API', async () => {
   const DIVI_RPC = require('./blockMonitor/src/divi/divi-rpc')
   expect(await DIVI_RPC.getBlockCount()).toBeGreaterThanOrEqual(0)
 })
@@ -200,14 +200,14 @@ The public website from milestone #1 will be updated and connected to the Casper
     - Monitor balances (based on the block monitor)
 */
 
-it('Load homepage of public website', async () => {
+it('MS2: Load homepage of public website', async () => {
   const fetch = require('node-fetch')
   expect(
     (await (await fetch('https://caspergo.io')).text()).length
   ).toBeGreaterThanOrEqual(0)
 })
 
-it('Manage CSPR keys using a simple key manager to allow for custodial accounts', async () => {
+it('MS2: Manage CSPR keys using a simple key manager to allow for custodial accounts', async () => {
   const CSPR = require('./src/coins/blockchain/casper')
   const seed1 =
     'egg foster tail bitter panther prevent marriage close junk problem immense speak egg code like section possible shell trash essay radar school tattoo select'
@@ -229,7 +229,7 @@ it('Manage CSPR keys using a simple key manager to allow for custodial accounts'
   )
 })
 
-it('Generate CSPR keys using a simple key manager to allow for custodial accounts in a deterministic pattern which can be backed up using a BIP39 seed phrase', async () => {
+it('MS2: Generate CSPR keys using a simple key manager to allow for custodial accounts in a deterministic pattern which can be backed up using a BIP39 seed phrase', async () => {
   const CSPR = require('./src/coins/blockchain/casper')
   const seed =
     '0a9f5af74e82f1839101d76348afac7c758b67c9390adc38e64e1c754e6929593e6700962b35ec0721e30a61011f7cfae394d9c1354d4281653ba9cf74f33906'
@@ -248,13 +248,13 @@ it('Generate CSPR keys using a simple key manager to allow for custodial account
   )
 })
 
-it('Monitor blocks (monitor each block looking for specific addresses, when a transaction is pending / confirmed, we can trigger an update on that specific user account to prevent system polling) and Monitor balances (based on the block monitor)', async () => {
+it('MS2: Monitor blocks (monitor each block looking for specific addresses, when a transaction is pending / confirmed, we can trigger an update on that specific user account to prevent system polling) and Monitor balances (based on the block monitor)', async () => {
   const BlockMonitor = require('./blockMonitor/casper/index') // import and start the block monitor
   expect(BlockMonitor.lastBlockId).toBeGreaterThanOrEqual(0)
 })
 
 /* 
-  it('Send transactions (compile, sign and deliver)', async () => {
+  it('MS2: Send transactions (compile, sign and deliver)', async () => {
     const CSPR = require('./src/coins/blockchain/casper')
     const seed =
       '0a9f5af74e82f1839101d76348afac7c758b67c9390adc38e64e1c754e6929593e6700962b35ec0721e30a61011f7cfae394d9c1354d4281653ba9cf74f33906'
@@ -270,3 +270,61 @@ it('Monitor blocks (monitor each block looking for specific addresses, when a tr
       ).length
     ).toBeGreaterThanOrEqual(0)
   })*/
+
+/*
+Milestone 3 Acceptance Criteria
+- The Custodial system is available for testing on the test net
+- Incoming Balance Monitor is configurable by user
+- Account block limits are editable by admin
+- Accounts can be enabled and disabled by admin
+*/
+
+it('MS3: The Custodial system is available for testing on the test net', async () => {
+  const CSPR = require('./src/coins/blockchain/casper')
+  const seed =
+    '0a9f5af74e82f1839101d76348afac7c758b67c9390adc38e64e1c754e6929593e6700962b35ec0721e30a61011f7cfae394d9c1354d4281653ba9cf74f33906'
+  expect(await CSPR.getPrivateKey(seed, 0)).toBe(
+    '207a1f6ffcbdaa03aebcb89f60e96c658537515965242f23686a9c764f260fac'
+  )
+})
+
+it('MS3: Incoming Balance Monitor is configurable by user', async () => {
+  const BlockMonitor = require('./blockMonitor/casper/index') // import and start the block monitor
+  expect(BlockMonitor.lastBlockId).toBeGreaterThanOrEqual(0)
+})
+
+it('MS3: Account block limits are editable by admin', async () => {
+  const userID = '63141254561e67c565f79b06'
+  const maxUSDPerMonth = 100
+  expect(
+    (
+      await CONTROLLERS.mgo.update(
+        CONTROLLERS.db,
+        'Users',
+        { _id: CONTROLLERS.mgo.id(userID) },
+        {
+          aml: {
+            limit: maxUSDPerMonth,
+            added: new Date(),
+          },
+        }
+      )
+    ).modifiedCount
+  ).toBe(0)
+})
+
+it('MS3: Accounts can be enabled and disabled by admin', async () => {
+  const userID = '63141254561e67c565f79b06'
+  expect(
+    (
+      await CONTROLLERS.mgo.update(
+        CONTROLLERS.db,
+        'Users',
+        { _id: CONTROLLERS.mgo.id(userID) },
+        {
+          active: false,
+        }
+      )
+    ).modifiedCount
+  ).toBe(0)
+})

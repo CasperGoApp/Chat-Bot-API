@@ -1,7 +1,8 @@
 let CONTROLLERS = null
 
+jest.setTimeout(50000)
+
 beforeAll(async () => {
-  jest.setTimeout(50000)
   CONTROLLERS = await require('./src/server')()
 })
 

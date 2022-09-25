@@ -4,7 +4,8 @@
   "description": "Chat Bot API used to deliver LetsGo messages",
   "main": "src/server.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "web": " npm i ; browserify web/index.js --s casper > html/js/casper.js"
   },
   "repository": {
     "type": "git",

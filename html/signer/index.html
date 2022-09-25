@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>CasperGo Test Page</title>
+  </head>
+  <body>
+    <div id="app">
+      <button id="btnConnect" onclick="casperWeb.connect()">Connect</button>
+      <button
+        id="btnDisconnect"
+        onclick="casperWeb.disconnect()"
+        style="display: none"
+      >
+        Disconnect
+      </button>
+      <div>
+        <h3>Validate Key</h3>
+        <input type="text" id="keyToValidate" size="40" />
+        <button type="button" onclick="casperWeb.validate()">Validate</button>
+      </div>
+
+      <div id="AccountInformation" style="display: none">
+        <div id="AccountHash"></div>
+        <div id="AccountUref"></div>
+        <div id="AccountBalance"></div>
+        <h3>Send</h3>
+        <label for="Amount">Amount</label>
+        <input id="Amount" type="number" value="2.5" />
+        <label for="Destination">Destination</label>
+        <input id="Destination" type="text" />
+        <button type="button" onclick="casperWeb.send()">Send</button>
+        <div id="tx"></div>
+      </div>
+    </div>
+    <script src="/js/jquery-3.5.1.min.js"></script>
+    <script src="/js/rpc.js"></script>
+    <script src="/js/casper.js"></script>
+    <script>
+      const casperWeb = {
+        installed: false,
+        isConnected: false,
+        checkInterval: null,
+        isLoadingAccount: false,
+        account: null,
+        load: (_) => {
+          casperWeb.installed = !!window.casperlabsHelper
+          if (casperWeb.installed) {
+            casperWeb.connect()
+          } else {
+            alert('Please install CasperLabs Signer')
+            document.location =
+              'https://chrome.google.com/webstore/detail/casper-signer/djhndpllfiibmcdbnmaaahkhchcoijce'
+          }
+        },
+        disconnect: () => {
+          if (!casperWeb.installed) return
+          window.casperlabsHelper.disconnectFromSite()
+          $('#btnDisconnect').hide()
+          $('#btnConnect').show()
+        },
+        connect: async () => {
+          if (!casperWeb.installed) return
+          casperWeb.checkInterval = window.setInterval(
+            casperWeb.checkConnection,
+            1000
+          )
+          try {
+            await casperWeb.checkConnection()
+            if (!casperWeb.isConnected) {
+              await window.casperlabsHelper.requestConnection()
+            }
+          } catch (e) {
+            console.log(e.message)
+            await window.casperlabsHelper.requestConnection()
+          }
+        },
+        checkConnection: async (_) => {
+          console.log('checkConnection')
+          try {
+            casperWeb.isConnected = await window.casperlabsHelper.isConnected()
+          } catch (e) {
+            console.log(e.message)
+          }
+          if (casperWeb.isConnected) {
+            clearInterval(casperWeb.checkInterval)
+            casperWeb.checkInterval = null
+            await casperWeb.loadAccount()
+          } else {
+            $('#btnDisconnect').hide()
+            $('#btnConnect').show()
+          }
+        },
+        loadAccount: async (_) => {
+          if (!casperWeb.isConnected) return
+          if (casperWeb.isConnected) {
+            const publicKey = await window.casperlabsHelper.getActivePublicKey()
+            casperWeb.getAccount(publicKey)
+            $('#btnDisconnect').show()
+            $('#btnConnect').hide()
+          } else {
+            $('#btnDisconnect').hide()
+            $('#btnConnect').show()
+          }
+        },
+        validate: async () => {
+          const publicKey = $('#keyToValidate').val()
+          if (publicKey.length === 66) {
+            casperWeb.getAccount(publicKey)
+          } else {
+            alert('Invalid key, please try again.')
+          }
+        },
+        getAccount: async (publicKey) => {
+          if (!casperWeb.isLoadingAccount) {
+            casperWeb.isLoadingAccount = true
+            $('#AccountInformation').hide()
+            $('#keyToValidate').val(publicKey)
+            casperWeb.account = await RPC.getAccountInfo(
+              (
+                await RPC.getLatestBlock()
+              ).hash,
+              publicKey
+            )
+            if (casperWeb.account && casperWeb.account.main_purse) {
+              casperWeb.account.balance =
+                (await RPC.getAccountBalance(
+                  await RPC.getStateRootHash((await RPC.getLatestBlock()).hash),
+                  casperWeb.account.main_purse
+                )) / 1000000000
+              $('#AccountHash').html(
+                'Account Hash: ' + casperWeb.account.account_hash
+              )
+              $('#AccountUref').html(
+                'Account Uref: ' + casperWeb.account.main_purse
+              )
+              $('#AccountBalance').html(
+                'Account Balance: ' + casperWeb.account.balance
+              )
+              $('#AccountInformation').show()
+            } else {
+              casperWeb.account = null
+              alert('Account not found, the key may be invalid.')
+            }
+            casperWeb.isLoadingAccount = false
+          } else {
+            alert('Please wait for the account to load')
+          }
+          console.log(casperWeb.account)
+        },
+        send: async (_) => {
+          const from = $('#keyToValidate').val()
+          const to = $('#Destination').val()
+          const amount = parseFloat($('#Amount').val()) * 1000000000
+          const publicKey = casper.CLPublicKey.fromHex(from)
+          const toPublicKey = casper.CLPublicKey.fromHex(to)
+          const json = casper.DeployUtil.deployToJson(
+            casper.DeployUtil.makeDeploy(
+              new casper.DeployUtil.DeployParams(
+                publicKey,
+                'casper',
+                1,
+                1800000
+              ),
+              casper.DeployUtil.ExecutableDeployItem.newTransfer(
+                amount,
+                toPublicKey,
+                null,
+                new Date().getTime()
+              ),
+              casper.DeployUtil.standardPayment(100000000)
+            )
+          )
+          const casperClient = new casper.CasperClient(RPC.url)
+          try {
+            const signed = await casperClient.putDeploy(
+              casper.DeployUtil.deployFromJson(
+                await window.casperlabsHelper.sign(json, from, to)
+              ).val
+            )
+            $('#tx').html('<strong>Transaction sent:</strong> ' + signed)
+          } catch (e) {
+            $('#tx').html('<strong>Transaction Error:</strong> ' + e.message)
+          }
+        },
+      }
+
+      window.onload = casperWeb.load
+    </script>
+  </body>
+</html>

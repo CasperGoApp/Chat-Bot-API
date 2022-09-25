@@ -53,8 +53,9 @@
             casperWeb.connect()
           } else {
             alert('Please install CasperLabs Signer')
-            document.location =
+            window.open(
               'https://chrome.google.com/webstore/detail/casper-signer/djhndpllfiibmcdbnmaaahkhchcoijce'
+            )
           }
         },
         disconnect: () => {

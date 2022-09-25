@@ -426,26 +426,19 @@ APP.xpr.add('get', '/:username', async (res, ip, req) => {
   }
 })
 
-APP.xpr.add('post', '/rpc', async (res, ip, req) => {
-  const result = await (
-    await fetch('http://3.14.161.135:7777/rpc', {
-      method: 'post', // set method to POST
-      headers: {
-        'Content-Type': 'application/json',
-      }, // set content type
-      body: JSON.stringify(req), // prepare data to send
-    })
-  ).json()
-  console.log({
-    method: 'post', // set method to POST
-    headers: {
-      'Content-Type': 'application/json',
-    }, // set content type
-    body: JSON.stringify(req.data), // prepare data to send
-  })
-  console.log(result)
-  res.json(result)
-})
+APP.xpr.add('post', '/rpc', async (res, ip, req) =>
+  res.json(
+    await (
+      await fetch('http://3.14.161.135:7777/rpc', {
+        method: 'post', // set method to POST
+        headers: {
+          'Content-Type': 'application/json',
+        }, // set content type
+        body: JSON.stringify(req), // prepare data to send
+      })
+    ).json()
+  )
+)
 
 const kickOut = (res) => res.redirect('https://caspergo.io') // kick out
 

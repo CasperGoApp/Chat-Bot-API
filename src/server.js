@@ -436,8 +436,6 @@ APP.xpr.add('post', '/rpc', async (res, ip, req) => {
       body: JSON.stringify(req), // prepare data to send
     })
   ).json()
-  res.json(true)
-  return
   console.log({
     method: 'post', // set method to POST
     headers: {

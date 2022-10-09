@@ -15,13 +15,13 @@ This repository is the base for the CasperGo Version of the LetsGo Mobile Wallet
 1.  DIVI, BTC, CSPR
 
     1.  [Install Base Server Software](#how-to-install-server-software)
-		1. Follow the instructions here: [Install Base Server Software](#how-to-install-server-software)
-    	2. [Install DIVI block monitors](#how-to-install-divi-daemon)
-    	3. [Install BTC block monitors](#how-to-install-btc-daemon)
+        1. Follow the instructions here: [Install Base Server Software](#how-to-install-server-software)
+        2. [Install DIVI block monitors](#how-to-install-divi-daemon)
+        3. [Install BTC block monitors](#how-to-install-btc-daemon)
     2.  [Install Base Server Software](#how-to-install-server-software)
-		1. Follow the instructions here: [Install Base Server Software](#how-to-install-server-software)
-    	2. [Install CSPR block monitors](#how-to-install-cspr-software)
-	3. [Install Repository and Start Services](#how-to-install-repository-and-start-services)
+        1. Follow the instructions here: [Install Base Server Software](#how-to-install-server-software)
+        2. [Install CSPR block monitors](#how-to-install-cspr-software)
+    3.  [Install Repository and Start Services](#how-to-install-repository-and-start-services)
 
 #### Management
 
@@ -617,7 +617,6 @@ pm2 save
 
 Run the following command and monitor the progress of the system.
 
-
 ```bash
 reboot
 ```
@@ -643,19 +642,30 @@ Start and run the services as specified and then run the following command to mo
 pm2 logs
 ```
 
+## Casper Signer Testing
+
+Due to Casper Signer approval and restrictions, the following needs to be ran on an approved casper signer application. As this platform does not use the Casper Signer in final deployment, the following steps will allow for testing of the Casper Signer Integration and the validation of Casper Keys on a Webpage.
+
+```bash
+cd html
+localhost
+```
+
+Once the local host is running, please navigate in your browser to http://localhost:8080/signer and connect with Casper Signer. Key Validation as well as Sending (Signing with Casper Signer) is available in the web iterface.
+
 ## Acknowledgments
 
-| Name | Link |
-| ---- | ----- |
-| node-fetch | https://www.npmjs.com/package/node-fetch |
-| bip32 | https://www.npmjs.com/package/bip32 |
-| speakeasy | https://www.npmjs.com/package/speakeasy |
-| bitcoinjs-lib | https://www.npmjs.com/package/bitcoinjs-lib |
-| gnodejs | https://www.npmjs.com/package/gnodejs |
-| qr-image | https://www.npmjs.com/package/qr-image |
-| dotenv | https://www.npmjs.com/package/dotenv |
-| mime-kind | https://www.npmjs.com/package/mime-kind |
+| Name                           | Link                                                   |
+| ------------------------------ | ------------------------------------------------------ |
+| node-fetch                     | https://www.npmjs.com/package/node-fetch               |
+| bip32                          | https://www.npmjs.com/package/bip32                    |
+| speakeasy                      | https://www.npmjs.com/package/speakeasy                |
+| bitcoinjs-lib                  | https://www.npmjs.com/package/bitcoinjs-lib            |
+| gnodejs                        | https://www.npmjs.com/package/gnodejs                  |
+| qr-image                       | https://www.npmjs.com/package/qr-image                 |
+| dotenv                         | https://www.npmjs.com/package/dotenv                   |
+| mime-kind                      | https://www.npmjs.com/package/mime-kind                |
 | gnome-wallet-address-validator | https://github.com/GnomeGroup/wallet-address-validator |
-| json-as-xlsx | https://www.npmjs.com/package/json-as-xlsx |
-| form-data | https://www.npmjs.com/package/form-data |
-| gmongo | https://www.npmjs.com/package/gmongo |
+| json-as-xlsx                   | https://www.npmjs.com/package/json-as-xlsx             |
+| form-data                      | https://www.npmjs.com/package/form-data                |
+| gmongo                         | https://www.npmjs.com/package/gmongo                   |

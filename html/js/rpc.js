@@ -13,7 +13,7 @@ const getRPCData = async (method, params) =>
   (await fetch(RPC.url, getFetchOptions(++id, method, params))).json() //retrieve RPC data from server
 
 const RPC = {
-  url: 'https://caspergo.io/rpc', // default server from Active peer list
+  url: 'https://caspergo.io/rpcTestnet', // default server from Active peer list
   putDeploy: async (deploy) =>
     (await getRPCData('account_put_deploy', { deploy })).result.deploy_hash, // putDeploy is a function which sends deploy data to server and returns deploy hash
   getDeployInfo: async (deploy_hash) =>

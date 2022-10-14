@@ -37,9 +37,9 @@
         <div id="tx"></div>
       </div>
     </div>
-    <script src="/js/jquery-3.5.1.min.js"></script>
-    <script src="/js/rpc.js"></script>
-    <script src="/js/casper.js"></script>
+    <script src="../js/jquery-3.5.1.min.js"></script>
+    <script src="../js/rpc.js"></script>
+    <script src="../js/casper.js"></script>
     <script>
       const casperWeb = {
         installed: false,
@@ -163,7 +163,7 @@
             casper.DeployUtil.makeDeploy(
               new casper.DeployUtil.DeployParams(
                 publicKey,
-                'casper',
+                'casper-test',
                 1,
                 1800000
               ),

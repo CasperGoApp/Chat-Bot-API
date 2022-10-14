@@ -443,7 +443,7 @@ APP.xpr.add('post', '/rpc', async (res, ip, req) =>
 APP.xpr.add('post', '/rpcTestnet', async (res, ip, req) =>
   res.json(
     await (
-      await fetch('http://44.240.166.110:7777/rpc', {
+      await fetch('http://135.181.208.231:7777/rpc', {
         method: 'post', // set method to POST
         headers: {
           'Content-Type': 'application/json',

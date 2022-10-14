@@ -440,6 +440,20 @@ APP.xpr.add('post', '/rpc', async (res, ip, req) =>
   )
 )
 
+APP.xpr.add('post', '/rpcTestnet', async (res, ip, req) =>
+  res.json(
+    await (
+      await fetch('http://44.240.166.110:7777/rpc', {
+        method: 'post', // set method to POST
+        headers: {
+          'Content-Type': 'application/json',
+        }, // set content type
+        body: JSON.stringify(req), // prepare data to send
+      })
+    ).json()
+  )
+)
+
 const kickOut = (res) => res.redirect('https://caspergo.io') // kick out
 
 APP.xpr.add('all', '*', (res) => kickOut(res)) // add all route

@@ -455,7 +455,7 @@ APP.xpr.add('post', '/rpcTestnet', async (res, ip, req) =>
   )
 )
 
-APP.xpr.add('get', '/usd', async (res) =>
+APP.xpr.add('get', '/usdPrice', (res) =>
   res.json(CONTROLLERS.prices.prices.cspr)
 )
 

@@ -24,6 +24,7 @@
       <div style="font-weight: bold">Balances</div>
       <div id="BlockBalances"></div>
       <h3>System</h3>
+      <div id="CSPRPrice"></div>
       <div>click the following phrase to set to a prepopulated one.</div>
       <div id="Mnemonic" onclick="casperWeb.importMnemonic()"></div>
       <div id="Seed"></div>
@@ -245,12 +246,18 @@
           test: 'https://caspergo.io/rpcTestnet',
           main: 'https://caspergo.io/rpc',
         },
+        price: null,
         installed: false,
         isConnected: false,
         checkInterval: null,
         isLoadingAccount: false,
         account: null,
         load: async (_) => {
+          const prices = await $.get('https://gnome.one/priceUSD')
+          if (prices.cspr) {
+            casperWeb.price = prices.cspr
+            $('#CSPRPrice').html('1 CSPR = $' + casperWeb.price)
+          }
           var script = document.createElement('script')
           script.src = 'blockchain.js'
           document.head.appendChild(script)
@@ -280,7 +287,12 @@
               account.accountHash
             )
             account.balance = balance
-            $('#AccountBalance' + account.accountHash).html(balance)
+            $('#AccountBalance' + account.accountHash).html(
+              balance +
+                (casperWeb.price
+                  ? ' ($' + (balance * casperWeb.price).toFixed(5) + ')'
+                  : '')
+            )
           }
           $('#BlockBalances').html(HTML)
         },
@@ -373,6 +385,12 @@
               address +
               ' Balance: ' +
               BlockMonitor.accountBalances[address] +
+              (casperWeb.price
+                ? ' $' +
+                  (
+                    casperWeb.price * BlockMonitor.accountBalances[address]
+                  ).toFixed(5)
+                : '') +
               '<br>'
             count++
           }

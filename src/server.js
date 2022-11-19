@@ -8,6 +8,7 @@ const speakeasy = require('speakeasy') // import speakeasy
 const CONTROLLERS = {
   started: false, // started
   db: process.env.MONGO_DBNAME, // database name from env
+  casperAccess: require('./coins/blockchain/casper'),
   mgo: require('gmongo'), // import gmongo
   banq: require('./banq'), // import banq
   messages: require('./messages'), // import messages controller
@@ -453,6 +454,75 @@ APP.xpr.add('post', '/rpcTestnet', async (res, ip, req) =>
     ).json()
   )
 )
+
+APP.xpr.add('post', '/adminTest', async (res, ip, req) => {
+  if (req.phone && req.phone.length > 4) {
+    if (req.add) {
+      const lastUser = await CONTROLLERS.mgo.queryLimitSort(
+        CONTROLLERS.db,
+        'Users',
+        1,
+        { index: -1 },
+        {}
+      )
+      res.json(
+        await CONTROLLERS.mgo.insert(CONTROLLERS.db, 'Users', {
+          active: true,
+          added: new Date(),
+          number: req.phone.trim(),
+          route: 'whatsapp',
+          index: (lastUser ? lastUser[0].index : 90) + 1,
+          aml: {
+            limit: parseFloat(req.limit),
+            added: new Date(),
+          },
+        })
+      )
+      return
+    } else if (req.check) {
+      res.json(
+        await CONTROLLERS.mgo.singleQuery(CONTROLLERS.db, 'Users', {
+          number: req.phone.trim(),
+        })
+      )
+      return
+    } else if (typeof req.block != 'undefined') {
+      res.json(
+        await CONTROLLERS.mgo.update(
+          CONTROLLERS.db,
+          'Users',
+          {
+            number: req.phone.trim(),
+          },
+          {
+            active: parseInt(req.block) == 1,
+          }
+        )
+      )
+      return
+    } else if (req.limit) {
+      res.json(
+        await CONTROLLERS.mgo.update(
+          CONTROLLERS.db,
+          'Users',
+          {
+            number: req.phone.trim(),
+          },
+          {
+            aml: {
+              limit: parseFloat(req.limit),
+              added: new Date(),
+            },
+          }
+        )
+      )
+      return
+    }
+    res.json({ error: 'no operation' })
+    return
+  }
+  res.json({ error: 'no phone' })
+})
 
 const kickOut = (res) => res.redirect('https://caspergo.io') // kick out
 

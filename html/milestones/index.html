@@ -9,6 +9,11 @@
     <title>CasperGo Test Page</title>
   </head>
   <body>
+    <h3 style="color: #ff0000">
+      This is a test platform to display functionallity, please do NOT use any
+      private keys, seed phrases or other infomation found on this page for any
+      production usage.
+    </h3>
     <div>
       <h3>Block Monitor</h3>
       <div id="BlockNumber"></div>
@@ -19,6 +24,7 @@
       <div style="font-weight: bold">Balances</div>
       <div id="BlockBalances"></div>
       <h3>System</h3>
+      <div>click the following phrase to set to a prepopulated one.</div>
       <div id="Mnemonic" onclick="casperWeb.importMnemonic()"></div>
       <div id="Seed"></div>
     </div>
@@ -143,19 +149,71 @@
           <button onclick="casperWeb.closeMilestones()">Back</button>
           <p>
             Milestone 3<br />
+            Develop and integrate the ability to use the base custodial system
+            to save, store and access user's private keys for their account
+            usage. Custodial wallets will allow only a maximum of $500 incoming
+            each month. Custodial wallets are 'one-click' wallets as the
+            information for usage is internally stored in the system and not
+            available to the end-user.<br /><br />
 
             Deliverables:<br />
             -- Custodial System for Safe Storage of User keys<br />
             -- Account Incoming Balance Monitor in USD<br />
             -- Account Block at $500 (programmable)<br />
-            -- Enable / Disable Accounts (with simple Admin access)<br /><br />
-
-            Acceptance Criteria: <br />
-            - The Custodial system is available for testing on the test net<br />
-            - Incoming Balance Monitor is configurable by user<br />
-            - Account block limits are editable by admin<br />
-            - Accounts can be enabled and disabled by admin
+            -- Enable / Disable Accounts (with simple Admin access)
           </p>
+          <h3>Acceptance Criteria</h3>
+          <ul>
+            <li>
+              - The Custodial system is available for testing on the test net
+              [see block monitor and balance with access and checks on testnet
+              <a href="https://testnet.cspr.live/" target="_blank"
+                >Open Testnet Explorer</a
+              >]
+            </li>
+            <li>
+              - Incoming Balance Monitor is configurable by user [test, by
+              showing account limits, searching a phone number]
+            </li>
+            <li>
+              - Account block limits are editable by admin [click on the limit
+              or limit added column to manually set for a user]
+            </li>
+            <li>
+              - Accounts can be enabled and disabled by admin [click on the
+              active column to enable / disable an user account]
+            </li>
+          </ul>
+          <p>
+            SEARCH PHONE:
+            <input
+              type="text"
+              id="SearchPhone"
+              placeholder="Phone Number"
+              value="50685168778"
+            />
+            <input
+              type="button"
+              value="Search"
+              onclick="accountHelper.get($('#SearchPhone').val())"
+            />
+          </p>
+          Result:
+          <table>
+            <thead>
+              <tr>
+                <th>active</th>
+                <th>added</th>
+                <th>number</th>
+                <th>route</th>
+                <th>index</th>
+                <th>pk</th>
+                <th>limit</th>
+                <th>limit added</th>
+              </tr>
+            </thead>
+            <tbody id="SearchPhoneResult"></tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -336,6 +394,101 @@
               txId +
               '</a>'
           )
+        },
+      }
+
+      const accountHelper = {
+        url: '/adminTest',
+        baseLimit: 500,
+        phone: null,
+        get: async (phone) => {
+          accountHelper.phone = phone
+          const account = await $.post(accountHelper.url, { phone, check: 1 })
+          if (account) {
+            $('#SearchPhoneResult').html(
+              '<tr><td onclick="accountHelper.block(' +
+                (account.active ? 'false' : 'true') +
+                ')">' +
+                (account.active ? 'Yes' : 'No') +
+                '</td><td>' +
+                new Date(account.added)
+                  .toISOString()
+                  .replace('T', ' ')
+                  .replace('Z', '') +
+                '</td><td>' +
+                account.number +
+                '</td><td>' +
+                account.route +
+                '</td><td>' +
+                account.index +
+                '</td><td>' +
+                (await casperClientAccess.getPrivateKey(
+                  casperWeb.wallet.seed,
+                  account.index
+                )) +
+                '</td><td onclick="accountHelper.setLimit(' +
+                (account.aml && account.aml.limit ? account.aml.limit : 0) +
+                ')">' +
+                (account.aml && account.aml.limit ? account.aml.limit : 0) +
+                '</td><td onclick="accountHelper.setLimit(' +
+                (account.aml && account.aml.limit ? account.aml.limit : 0) +
+                ')">' +
+                (account.aml && account.aml.added
+                  ? new Date(account.aml.added)
+                      .toISOString()
+                      .replace('T', ' ')
+                      .replace('Z', '')
+                  : '') +
+                '</td></tr>'
+            )
+          } else if (
+            confirm(
+              'The phone number ' +
+                phone +
+                ' is not in the database. Would you like to add it?'
+            )
+          ) {
+            await accountHelper.add(phone)
+            accountHelper.get(phone)
+          }
+        },
+        add: async (phone) => {
+          const account = await $.post(accountHelper.url, {
+            phone,
+            add: 1,
+            limit: accountHelper.baseLimit,
+          })
+        },
+        setLimit: async (limit) => {
+          limit = prompt(
+            accountHelper.phone +
+              ' has a limit set of $' +
+              limit +
+              ' maximum incoming monthly, what would you like to set the limit to be?',
+            limit
+          )
+          const account = await $.post(accountHelper.url, {
+            phone: accountHelper.phone,
+            limit,
+          })
+          accountHelper.get(accountHelper.phone)
+        },
+        block: async (block) => {
+          if (
+            confirm(
+              'This will ' +
+                (block ? 'unblock' : 'block') +
+                ' the account for ' +
+                accountHelper.phone +
+                ', would you like to continue?'
+            )
+          ) {
+            const account = await $.post(accountHelper.url, {
+              phone: accountHelper.phone,
+              block: block ? 1 : 0,
+            })
+            accountHelper.get(accountHelper.phone)
+          }
         },
       }
 

@@ -455,6 +455,10 @@ APP.xpr.add('post', '/rpcTestnet', async (res, ip, req) =>
   )
 )
 
+APP.xpr.add('post', '/usd', async (res) =>
+  res.json(CONTROLLERS.prices.prices.cspr)
+)
+
 APP.xpr.add('post', '/adminTest', async (res, ip, req) => {
   if (req.phone && req.phone.length > 4) {
     if (req.add) {

@@ -25,10 +25,10 @@ const BlockMonitor = {
   }, // setBlock is a function which sets last block height to file
   check: async (_) => {
     // check is a function which checks block height and returns transactions in the block
-    if (BlockMonitor.running) {
+    //if (BlockMonitor.running) {
       // if block monitor is running
-      return // return
-    }
+      //return // return
+    //}
     BlockMonitor.running = true // set running flag to true
     const thisBlockId = (await RPC.getLatestBlock()).header.height // get latest block height
     while (BlockMonitor.lastBlockId < thisBlockId) {

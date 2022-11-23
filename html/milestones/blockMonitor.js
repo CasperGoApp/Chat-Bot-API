@@ -1,7 +1,7 @@
 const BlockMonitor = {
   // BlockMonitor is a class which contains methods to monitor blocks
   lastBlock: 0, // lastBlock contains last block height
-  delay: 15000, // delay is a delay between block checking
+  delay: 10000, // delay is a delay between block checking
   lastBlockId: 0, // lastBlockId is a last block height in memory
   accounts: null, // accounts is a list of accounts to check in blocks
   running: false, // running is a flag which indicates if BlockMonitor is running
@@ -11,8 +11,9 @@ const BlockMonitor = {
     BlockMonitor.lastBlock = parseInt(
       localStorage.getItem('lastBlock')
         ? localStorage.getItem('lastBlock')
-        : (await RPC.getLatestBlock()).header.height
+        : (await RPC.getLatestBlock()).header.height - 1
     ) // set last block height
+    console.log(BlockMonitor.lastBlock)
     BlockMonitor.onFoundTx = foundTx // set callback function
     BlockMonitor.lastBlockId = parseInt(BlockMonitor.lastBlock) // load last block height from file
     BlockMonitor.check() // check blocks
@@ -25,13 +26,15 @@ const BlockMonitor = {
   }, // setBlock is a function which sets last block height to file
   check: async (_) => {
     // check is a function which checks block height and returns transactions in the block
-    //if (BlockMonitor.running) {
+    if (BlockMonitor.running) {
       // if block monitor is running
-      //return // return
-    //}
+      return // return
+    }
     BlockMonitor.running = true // set running flag to true
     const thisBlockId = (await RPC.getLatestBlock()).header.height // get latest block height
+    console.log(BlockMonitor.lastBlockId, thisBlockId)
     while (BlockMonitor.lastBlockId < thisBlockId) {
+      console.log(BlockMonitor.lastBlockId, thisBlockId)
       // while last block height is less than this block height
       const transfers = await RPC.getBlockTransfers(
         (
